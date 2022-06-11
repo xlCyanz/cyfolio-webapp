@@ -22,16 +22,11 @@ export default {
     homepage: {
       title: "Hello, my name is",
       subtitle: "I'm a",
-      subtitleJob: "Web Developer",
-      description:
-        "I'm a web developer with extensive knowledge in web application development.",
       buttonAboutMe: "More about me",
     },
     aboutpage: {
       title: "About me",
       subtitle: "Hey! It's {name} and I'm a {job} ",
-      description:
-        "I live in Dominican Republic. Since 2015 I have been on the web for fun and in 2017 I took it seriously and started learning the technologies used on the web. In recent years I have collaborated on projects as a junior and I have increased my knowledge and good practices on the web.",
       dataPersonal: {
         birthday: "Birthday",
         age: "Age",

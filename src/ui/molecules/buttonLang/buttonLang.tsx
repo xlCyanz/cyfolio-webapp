@@ -1,9 +1,10 @@
 import Swal from "sweetalert2";
 import { Icon } from "@atoms";
-import { Button, Flex } from "theme-ui";
 import { I18nContext } from "@contexts";
+import { Button, Flex, useThemeUI } from "theme-ui";
 
 const ButtonLang = () => {
+  const { theme } = useThemeUI();
   const { locale, changeLang } = I18nContext.useI8nContext();
 
   const handleChangeLang = async () => {
@@ -26,7 +27,7 @@ const ButtonLang = () => {
       },
       confirmButtonText: locale?.messages.alertChangingLanguage.buttonAccept,
       cancelButtonText: locale?.messages.alertChangingLanguage.buttonCancel,
-      confirmButtonColor: "var(--theme-ui-colors-primary)",
+      confirmButtonColor: `${theme.colors?.primary}`,
       cancelButtonColor: "#d33",
       showCancelButton: true,
       inputPlaceholder: locale?.messages.alertChangingLanguage.inputPlaceholder,

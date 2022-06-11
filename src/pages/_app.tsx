@@ -2,12 +2,9 @@ import { ReactNode } from "react";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "theme-ui";
-import { SkeletonTheme } from "react-loading-skeleton";
 import { AnimatePresence } from "framer-motion";
 import { GlobalStyles, theme } from "@core";
-import { ApolloClientContext, I18nContext } from "@contexts";
-
-import "react-loading-skeleton/dist/skeleton.css";
+import { ApolloClientContext, I18nContext, SkeletonContext } from "@contexts";
 
 const GlobalProviders = ({ children }: { children: ReactNode }) => (
   <ApolloClientContext>
@@ -18,13 +15,10 @@ const GlobalProviders = ({ children }: { children: ReactNode }) => (
           exitBeforeEnter
           onExitComplete={() => window.scrollTo(0, 0)}
         >
-          <SkeletonTheme baseColor="#dfe4ea" highlightColor="#ced6e0">
-            {children}
-          </SkeletonTheme>
+          <SkeletonContext>{children}</SkeletonContext>
+          <GlobalStyles />
         </AnimatePresence>
       </I18nContext.Provider>
-
-      <GlobalStyles />
     </ThemeProvider>
   </ApolloClientContext>
 );

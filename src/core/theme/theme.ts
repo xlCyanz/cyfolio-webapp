@@ -5,15 +5,18 @@ const theme: Theme = {
     initialColorModeName: "light",
   },
   colors: {
-    text: "#1d1c36",
+    text: "#1D1C36",
     muted: "#E0E0E0",
-    silver: "red",
     background: "#F1F1FB",
+    skeletonBase: "#DFE4EA",
+    skeletonHighlight: "#BDBEBF",
     modes: {
       dark: {
         text: "#F6F6F6",
         muted: "#474347",
         background: "#151415",
+        skeletonBase: "#545454",
+        skeletonHighlight: "#1A1A1A",
       },
     },
     // Colors without dark mode.
