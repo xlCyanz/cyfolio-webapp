@@ -157,7 +157,7 @@ const Contact: NextPage = () => {
               mb={3}
             />
 
-            <Button type="submit">
+            <Button type="submit" aria-label="submit-contact">
               {locale?.messages.contactpage.button || "Submit"}
             </Button>
           </Box>

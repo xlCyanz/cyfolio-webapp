@@ -196,6 +196,9 @@ const AboutProject: NextPage = () => {
                   locale?.messages.projectspage.dynamicPage.buttonRepository ||
                   "Visit repository"
                 }
+                buttonProps={{
+                  "aria-label": "visit-repository",
+                }}
               />
             ),
           )}
@@ -213,6 +216,9 @@ const AboutProject: NextPage = () => {
                   locale?.messages.projectspage.dynamicPage.buttonOnline ||
                   "Visit online application"
                 }
+                buttonProps={{
+                  "aria-label": "visit-app-online",
+                }}
               />
             ),
           )}

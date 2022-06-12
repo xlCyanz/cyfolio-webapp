@@ -121,6 +121,7 @@ const Home: NextPage = () => {
               text={locale?.messages.homepage.buttonAboutMe || ""}
               buttonProps={{
                 mt: 3,
+                "aria-label": "about-me",
               }}
             />
           </Box>

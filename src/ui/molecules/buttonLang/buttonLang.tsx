@@ -46,6 +46,7 @@ const ButtonLang = () => {
         textAlign: "center",
         borderRadius: "50%",
       }}
+      aria-label="change-language"
     >
       <Flex>
         <Icon name="translate" height={26} width={26} />

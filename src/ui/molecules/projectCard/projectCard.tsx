@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: IProjectCard) => {
         <ButtonLink
           href={`${Routes.PROJECTS}/${project?.slug}`}
           text={locale?.messages.projectspage.buttonReadMore || ""}
-          buttonProps={{ px: 3 }}
+          buttonProps={{ px: 3, "aria-label": "read-more-project" }}
         />
       </Box>
     </Flex>

@@ -16,6 +16,7 @@ const ButtonTheme = () => {
         textAlign: "center",
         borderRadius: "50%",
       }}
+      aria-label="change-theme"
     >
       <Flex>
         {colorMode === "light" ? (

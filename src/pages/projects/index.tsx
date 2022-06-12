@@ -68,7 +68,7 @@ const Projects: NextPage = () => {
 
           {(projects?.length || 0) > limitProjects && (
             <Flex mt={5} sx={{ justifyContent: "center" }}>
-              <Button onClick={loadMoreProjects}>
+              <Button onClick={loadMoreProjects} aria-label="load-more-projecs">
                 {locale?.messages.projectspage.buttonLoadMore}
               </Button>
             </Flex>

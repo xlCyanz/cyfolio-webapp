@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cyfolio-api.herokuapp.com"],
+    domains: ["cyfolio-api.herokuapp.com", "localhost"],
   },
 };
 

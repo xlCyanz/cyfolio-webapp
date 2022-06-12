@@ -128,6 +128,9 @@ const About: NextPage = () => {
                   text={
                     locale?.messages.aboutpage.buttonDownloadCV || "Download CV"
                   }
+                  buttonProps={{
+                    "aria-label": "download-cv",
+                  }}
                 />
               </Flex>,
             )}

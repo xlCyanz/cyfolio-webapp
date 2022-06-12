@@ -9,6 +9,7 @@ const GlobalStyles = () => (
         src: url("/fonts/Poppins-Regular.ttf");
         font-weight: 400;
         font-style: normal;
+        font-display: swap;
       }
 
       @font-face {
@@ -16,6 +17,7 @@ const GlobalStyles = () => (
         src: url("/fonts/ClickerScript-Regular.ttf");
         font-weight: 400;
         font-style: normal;
+        font-display: swap;
       }
 
       @font-face {
@@ -23,6 +25,7 @@ const GlobalStyles = () => (
         src: url("/fonts/Poppins-Bold.ttf");
         font-weight: 700;
         font-style: normal;
+        font-display: swap;
       }
 
       @font-face {
@@ -30,6 +33,7 @@ const GlobalStyles = () => (
         src: url("/fonts/Poppins-Black.ttf");
         font-weight: 900;
         font-style: normal;
+        font-display: swap;
       }
 
       html,
