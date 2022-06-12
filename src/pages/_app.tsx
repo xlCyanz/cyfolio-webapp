@@ -10,14 +10,16 @@ const GlobalProviders = ({ children }: { children: ReactNode }) => (
   <ApolloClientContext>
     <ThemeProvider theme={theme}>
       <I18nContext.Provider>
-        <AnimatePresence
-          initial={false}
-          exitBeforeEnter
-          onExitComplete={() => window.scrollTo(0, 0)}
-        >
-          <SkeletonContext>{children}</SkeletonContext>
-          <GlobalStyles />
-        </AnimatePresence>
+        <SkeletonContext>
+          <AnimatePresence
+            initial={false}
+            exitBeforeEnter
+            onExitComplete={() => window.scrollTo(0, 0)}
+          >
+            {children}
+          </AnimatePresence>
+        </SkeletonContext>
+        <GlobalStyles />
       </I18nContext.Provider>
     </ThemeProvider>
   </ApolloClientContext>
