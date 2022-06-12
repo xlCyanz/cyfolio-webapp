@@ -146,16 +146,16 @@ const Home: NextPage = () => {
                   loadingHomePage,
                   <Skeleton height={350} />,
                 )(
-                  <Image
-                    src={
-                      homePageInfo?.profilePic.url ||
-                      "https://dummyimage.com/200x200"
-                    }
-                    layout="fill"
-                    alt="profile-pic-home"
-                    objectFit="cover"
-                    objectPosition="center"
-                  />,
+                  homePageInfo?.profilePic && (
+                    <Image
+                      src={homePageInfo?.profilePic.url}
+                      layout="fill"
+                      alt="profile-pic-home"
+                      objectFit="cover"
+                      objectPosition="center"
+                      priority
+                    />
+                  ),
                 )}
               </Box>
             </Box>
