@@ -1,9 +1,10 @@
+import { Icon } from "@atoms";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { Sidebar } from "@organisms";
-import { ButtonLang, ButtonTheme } from "@molecules";
 import { FC, ReactNode, useState } from "react";
-import { Box, Container, Flex, MenuButton } from "theme-ui";
+import { ButtonLang, ButtonTheme } from "@molecules";
+import { Box, Button, Container, Flex } from "theme-ui";
 
 interface IMainLayoutProps {
   children: ReactNode;
@@ -49,32 +50,45 @@ const MainLayout: FC<IMainLayoutProps> = ({ children, title, container }) => {
             overflowY: "auto",
           }}
         >
-          <Box sx={{ position: "fixed", margin: 2, zIndex: 2 }}>
-            <MenuButton
-              aria-label="Toggle Sidebar"
-              onClick={() => setIsShowing((prev) => !prev)}
-              sx={{
-                bg: "primary",
-                color: "white",
-                width: "40px",
-                height: "35px",
-                display: [null, "none"],
-              }}
-            />
-          </Box>
-
           <Flex
+            m={3}
             sx={{
-              flexDirection: "column",
-              gap: 3,
               position: "fixed",
-              margin: 4,
-              right: 0,
+              alignItems: "center",
               zIndex: 2,
             }}
           >
-            <ButtonTheme />
-            <ButtonLang />
+            <Button
+              p={2}
+              sx={{
+                bg: "primary",
+                color: "white",
+                borderRadius: "10%",
+                zIndex: 1,
+                display: ["block", "none"],
+              }}
+              aria-label="change-theme"
+              onClick={() => setIsShowing((prev) => !prev)}
+            >
+              <Flex>
+                <Icon name="menu" height={24} width={24} />
+              </Flex>
+            </Button>
+
+            <Flex
+              sx={{
+                flexDirection: ["row", "column"],
+                gap: 3,
+                position: "fixed",
+                right: [3],
+                top: [null, 0],
+                mx: [3],
+                my: [null, 4],
+              }}
+            >
+              <ButtonTheme />
+              <ButtonLang />
+            </Flex>
           </Flex>
 
           {container ? (

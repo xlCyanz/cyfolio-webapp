@@ -8,7 +8,7 @@ import {
   MoonIcon,
 } from "@heroicons/react/solid";
 
-import { TranslateIcon } from "@heroicons/react/outline";
+import { MenuIcon, TranslateIcon, XIcon } from "@heroicons/react/outline";
 
 const iconBundle = {
   home: HomeIcon,
@@ -19,6 +19,8 @@ const iconBundle = {
   moon: MoonIcon,
   calendar: CalendarIcon,
   translate: TranslateIcon,
+  menu: MenuIcon,
+  close: XIcon,
 };
 
 export default iconBundle;
