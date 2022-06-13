@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { JsxUtil } from "@utils";
+import { jsxUtil } from "@utils";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
 import { useQuery } from "@apollo/client";
@@ -73,7 +73,7 @@ const AboutProject: NextPage = () => {
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
 
-        {JsxUtil.renderLoader(
+        {jsxUtil.renderLoader(
           loading,
           <Box
             mb={[1, 2]}
@@ -119,14 +119,14 @@ const AboutProject: NextPage = () => {
             gap: [0, 3, 0],
           }}
         >
-          {JsxUtil.renderLoader(
+          {jsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["100%", "40%"] }}>
               <Skeleton height={40} />
             </Box>,
           )(<Heading as="h1">{project?.title}</Heading>)}
 
-          {JsxUtil.renderLoader(
+          {jsxUtil.renderLoader(
             loading,
             <Flex
               sx={{
@@ -163,7 +163,7 @@ const AboutProject: NextPage = () => {
           )}
         </Flex>
 
-        {JsxUtil.renderLoader(
+        {jsxUtil.renderLoader(
           loading,
           <>
             <Skeleton count={2} height={16} />
@@ -183,7 +183,7 @@ const AboutProject: NextPage = () => {
             width: "100%",
           }}
         >
-          {JsxUtil.renderLoader(
+          {jsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["50%", "20%"] }}>
               <Skeleton height={40} />
@@ -203,7 +203,7 @@ const AboutProject: NextPage = () => {
             ),
           )}
 
-          {JsxUtil.renderLoader(
+          {jsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["70%", "30%"] }}>
               <Skeleton height={40} />

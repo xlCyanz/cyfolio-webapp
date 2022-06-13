@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
+import { Skeleton } from "@atoms";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
-import { JsxUtil, replaceJsx } from "@utils";
-import { ButtonLink, Skeleton } from "@atoms";
+import { fetchPdf, jsxUtil, replaceJsx } from "@utils";
 import { AboutPageModel, TechnologieModel } from "@models";
-import { Box, Flex, Text, Heading, Paragraph } from "theme-ui";
 import { useGetConfigGeneral, useQueryExpiration } from "@hooks";
+import { Box, Flex, Text, Heading, Paragraph, Button } from "theme-ui";
 import { GridDataPersonal, TechnologieCard, Timeline } from "@molecules";
 import { IAboutpageResponseGQL, ITechnologiesResponseGQL } from "@types";
 
@@ -17,7 +17,7 @@ const TextStyled = (text: string) => (
   </Text>
 );
 
-const ABOUT_INFORMATION_EXPIRATION_TIME = 12 * 60 * 60; // 12 hours
+const ABOUT_INFORMATION_EXPIRATION_TIME = 6 * 60 * 60; // 6 hours
 const TECHNOLOGIES_EXPIRATION_TIME = 24 * 60 * 60; // 1 day
 
 const About: NextPage = () => {
@@ -57,12 +57,10 @@ const About: NextPage = () => {
   }, [aboutPageData, loadingAboutPage]);
 
   return (
-    <MainLayout title={locale?.messages.aboutpage.title || "About"}>
+    <MainLayout title={locale?.messages.aboutpage.title}>
       <Box>
         <Box mb={4}>
-          <Heading as="h1">
-            {locale?.messages.aboutpage.title || "About"}
-          </Heading>
+          <Heading as="h1">{locale?.messages.aboutpage.title}</Heading>
 
           <Box
             bg="primary"
@@ -77,7 +75,7 @@ const About: NextPage = () => {
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
 
-        {JsxUtil.renderLoader(
+        {jsxUtil.renderLoader(
           loadingConfigGeneral,
           <Skeleton height={30} mb={3} width="100%" />,
         )(
@@ -89,7 +87,7 @@ const About: NextPage = () => {
           </Heading>,
         )}
 
-        {JsxUtil.renderLoader(
+        {jsxUtil.renderLoader(
           loadingAboutPage,
           <>
             <Skeleton height={12} width="90%" />
@@ -107,7 +105,7 @@ const About: NextPage = () => {
           }}
         >
           <Box sx={{ width: ["100%", "50%"] }}>
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loadingAboutPage,
               <GridDataPersonal.Skeleton />,
             )(
@@ -118,20 +116,20 @@ const About: NextPage = () => {
               />,
             )}
 
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loadingAboutPage,
               <Skeleton height={40} mt={4} width="50%" />,
             )(
               <Flex mt={4} sx={{ flexDirection: "row" }}>
-                <ButtonLink
-                  href={aboutPageInfo?.curriculumVitae.url || ""}
-                  text={
-                    locale?.messages.aboutpage.buttonDownloadCV || "Download CV"
+                <Button
+                  type="button"
+                  aria-label="button-download-cv"
+                  onClick={() =>
+                    fetchPdf(aboutPageInfo?.curriculumVitae.url || "")
                   }
-                  buttonProps={{
-                    "aria-label": "download-cv",
-                  }}
-                />
+                >
+                  {locale?.messages.aboutpage.buttonDownloadCV}
+                </Button>
               </Flex>,
             )}
           </Box>
@@ -144,17 +142,18 @@ const About: NextPage = () => {
               width: ["100%", "50%"],
             }}
           >
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loadingTechnologies,
               <>
-                {[...Array(3).keys()].map((i) => (
-                  <Box
-                    key={`technologies-card-skeleton-${i}`}
-                    sx={{ width: ["100%", "50%"], m: 1 }}
-                  >
-                    <Skeleton height={30} width="100%" />
-                  </Box>
-                ))}
+                <Box sx={{ width: ["100%", "50%"], m: 1 }}>
+                  <Skeleton height={30} />
+                </Box>
+                <Box sx={{ width: ["100%", "50%"], m: 1 }}>
+                  <Skeleton height={30} />
+                </Box>
+                <Box sx={{ width: ["100%", "50%"], m: 1 }}>
+                  <Skeleton height={30} />
+                </Box>
               </>,
             )(
               technologies?.map((tech) => (
@@ -175,7 +174,7 @@ const About: NextPage = () => {
               </Heading>
             )}
 
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loadingAboutPage,
               <Timeline.Skeleton />,
             )(<Timeline items={aboutPageInfo?.educationTimeline || []} />)}
@@ -188,7 +187,7 @@ const About: NextPage = () => {
               </Heading>
             )}
 
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loadingAboutPage,
               <Timeline.Skeleton />,
             )(<Timeline items={aboutPageInfo?.experienceTimeline || []} />)}

@@ -9,7 +9,7 @@ interface IUseGetConfigGeneralProps {
   locale: string;
 }
 
-const CONFIG_GENERAL_EXPIRATION_TIME = 24 * 60 * 60; // 1 day
+const CONFIG_GENERAL_EXPIRATION_TIME = 12 * 60 * 60; // 1 day
 
 const useGetConfigGeneral = ({ locale }: IUseGetConfigGeneralProps) => {
   const { loading, data } = useQueryExpiration<IConfigGeneralResponseGQL>(

@@ -14,8 +14,8 @@ import {
   Button,
   Heading,
   Textarea,
-  Link as LinkA,
   useThemeUI,
+  Link as LinkA,
 } from "theme-ui";
 
 const Contact: NextPage = () => {

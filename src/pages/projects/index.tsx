@@ -1,4 +1,4 @@
-import { JsxUtil } from "@utils";
+import { jsxUtil } from "@utils";
 import { NextPage } from "next";
 import { useState } from "react";
 import { MainLayout } from "@templates";
@@ -37,7 +37,7 @@ const Projects: NextPage = () => {
 
         <Box>
           <Grid columns={[1, 2, null, 3, 4]} gap={3}>
-            {JsxUtil.renderLoader(
+            {jsxUtil.renderLoader(
               loading,
               <>
                 <ProjectCard.Skeleton />

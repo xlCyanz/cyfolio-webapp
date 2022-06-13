@@ -26,6 +26,7 @@
     "@mdx-js/react": "v1",
     "@theme-ui/presets": "^0.14.5",
     "apollo3-cache-persist": "^0.14.0",
+    "axios": "^0.27.2",
     "cross-fetch": "^3.1.5",
     "dayjs": "^1.11.3",
     "framer-motion": "^6.3.10",

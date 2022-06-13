@@ -1,12 +1,12 @@
-import { DateUtil, StorageUtil } from "@utils";
+import { dateUtil, storageUtil } from "@utils";
 import {
-  FetchPolicy,
-  OperationVariables,
-  QueryHookOptions,
   useQuery,
+  FetchPolicy,
+  QueryHookOptions,
+  OperationVariables,
 } from "@apollo/client";
 
-const LocalStorage = StorageUtil();
+const LocalStorage = storageUtil();
 
 const getExpirationFetchPolicy = (
   expiration: number,
@@ -16,11 +16,11 @@ const getExpirationFetchPolicy = (
 
   if (
     lastFetch === null ||
-    DateUtil().diff(DateUtil(lastFetch), "second") > expiration
+    dateUtil().diff(dateUtil(lastFetch), "second") > expiration
   ) {
     LocalStorage.setItem(
       key,
-      DateUtil().set("second", expiration).toISOString(),
+      dateUtil().set("second", expiration).toISOString(),
     );
     return "network-only";
   }

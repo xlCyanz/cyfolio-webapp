@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Skeleton } from "@atoms";
 import { I18nContext } from "@contexts";
-import { calculateAge, DateUtil } from "@utils";
+import { calculateAge, dateUtil } from "@utils";
 import { Box, Grid, Text, Link as LinkA, useThemeUI } from "theme-ui";
 
 require("dayjs/locale/es");
@@ -20,7 +20,7 @@ const GridDataPersonal = ({
   const { theme } = useThemeUI();
   const { locale, lang } = I18nContext.useI8nContext();
 
-  const birthdayFormat = DateUtil(birthday, lang).format("DD MMM YYYY");
+  const birthdayFormat = dateUtil(birthday, lang).format("DD MMM YYYY");
 
   return (
     <Grid columns={[1, null, "1fr 1.2fr"]} sx={{ columnGap: 3 }}>
