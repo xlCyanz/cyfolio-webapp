@@ -1,6 +1,7 @@
 import { FormatGQL, IUploadFileGQL } from "@types";
 
 const GRAPHQL_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+const { NODE_ENV } = process.env;
 
 if (!GRAPHQL_URL) {
   throw new Error("Please add your Server URL to enviroment variables.");
@@ -16,7 +17,10 @@ const MediaModel = ({ data }: FormatGQL<IUploadFileGQL>) => {
         [key]: {
           name: rawFormats[key]?.name,
           hash: rawFormats[key]?.hash,
-          url: `${GRAPHQL_URL}${rawFormats[key]?.url}`,
+          url:
+            NODE_ENV === "production"
+              ? `${GRAPHQL_URL}${rawFormats[key]?.url}`
+              : rawFormats[key]?.url,
         },
       };
     },
@@ -45,10 +49,13 @@ const MediaModel = ({ data }: FormatGQL<IUploadFileGQL>) => {
   );
 
   return {
-    name: data.attributes.name,
-    hash: data.attributes.hash,
-    alternativeText: data.attributes.alternativeText,
-    url: `${GRAPHQL_URL}${data.attributes.url}`,
+    name: data?.attributes.name,
+    hash: data?.attributes.hash,
+    alternativeText: data?.attributes.alternativeText,
+    url:
+      NODE_ENV === "production"
+        ? data?.attributes.url
+        : `${GRAPHQL_URL}${data?.attributes.url}`,
     formats,
   };
 };
