@@ -56,6 +56,14 @@ const About: NextPage = () => {
     return AboutPageModel(aboutPageData.aboutpage.data);
   }, [aboutPageData, loadingAboutPage]);
 
+  const handleDownloadPdf = async () => {
+    try {
+      fetchPdf(aboutPageInfo?.curriculumVitae.url || "");
+    } catch (e) {
+      window.open(aboutPageInfo?.curriculumVitae.url || "", "_blank");
+    }
+  };
+
   return (
     <MainLayout title={locale?.messages.aboutpage.title}>
       <Box>
@@ -124,9 +132,7 @@ const About: NextPage = () => {
                 <Button
                   type="button"
                   aria-label="button-download-cv"
-                  onClick={() =>
-                    fetchPdf(aboutPageInfo?.curriculumVitae.url || "")
-                  }
+                  onClick={handleDownloadPdf}
                 >
                   {locale?.messages.aboutpage.buttonDownloadCV}
                 </Button>
