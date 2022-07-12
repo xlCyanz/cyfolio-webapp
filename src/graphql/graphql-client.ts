@@ -6,7 +6,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 const GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_SERVER_URL;
 
 if (!GRAPHQL_URL) {
-  throw new Error("Please add your Server URL to enviroment variables.");
+  throw new Error("Please add your GraphQL URL to enviroment variables.");
 }
 
 const cache = new InMemoryCache();

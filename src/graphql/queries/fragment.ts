@@ -28,5 +28,3 @@ export const TECHNOLOGIES_FIELDS = gql`
     }
   }
 `;
-
-export default {};

@@ -18,6 +18,14 @@ import {
   Link as LinkA,
 } from "theme-ui";
 
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+  throw new Error("Please add your EmailJS to enviroment variables.");
+}
+
 const Contact: NextPage = () => {
   const { locale, lang } = I18nContext.useI8nContext();
   const { colorMode } = useThemeUI();
@@ -45,10 +53,10 @@ const Contact: NextPage = () => {
 
     emailjs
       .sendForm(
-        "service_bjfbf4g_cyfolio",
-        "template_7c85t36",
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         e?.currentTarget,
-        "user_0NvuajmhioHHreKYoDui",
+        EMAILJS_PUBLIC_KEY,
       )
       .then((response) => {
         if (response.status === 200) {

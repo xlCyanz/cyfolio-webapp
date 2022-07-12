@@ -17,8 +17,8 @@ const TextStyled = (text: string) => (
   </Text>
 );
 
-const ABOUT_INFORMATION_EXPIRATION_TIME = 6 * 60 * 60; // 6 hours
-const TECHNOLOGIES_EXPIRATION_TIME = 24 * 60 * 60; // 1 day
+const ABOUT_INFORMATION_EXPIRATION_TIME = 24 * 60 * 60; // 1 day
+const TECHNOLOGIES_EXPIRATION_TIME = 48 * 60 * 60; // 2 day
 
 const About: NextPage = () => {
   const { locale, lang } = I18nContext.useI8nContext();
@@ -57,11 +57,7 @@ const About: NextPage = () => {
   }, [aboutPageData, loadingAboutPage]);
 
   const handleDownloadPdf = async () => {
-    try {
-      fetchPdf(aboutPageInfo?.curriculumVitae.url || "");
-    } catch (e) {
-      window.open(aboutPageInfo?.curriculumVitae.url || "", "_blank");
-    }
+    await fetchPdf(aboutPageInfo?.curriculumVitae.url || "");
   };
 
   return (
