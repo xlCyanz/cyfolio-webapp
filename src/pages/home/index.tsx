@@ -1,7 +1,7 @@
+import React from "react";
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
 import { Routes } from "@core";
-import { useMemo } from "react";
 import { jsxUtil } from "@utils";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
       },
     );
 
-  const homePageInfo = useMemo(() => {
+  const homePageInfo = React.useMemo(() => {
     if (loadingHomePage || !homePageData) return null;
     return HomePageModel(homePageData.homepage.data);
   }, [homePageData, loadingHomePage]);

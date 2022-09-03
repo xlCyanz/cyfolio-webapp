@@ -1,6 +1,6 @@
+import React from "react";
 import { jsxUtil } from "@utils";
 import { NextPage } from "next";
-import { useState } from "react";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { ProjectCard } from "@molecules";
@@ -11,7 +11,7 @@ const Projects: NextPage = () => {
   const { locale, lang } = I18nContext.useI8nContext();
   const { loading, projects } = useGetProjects({ locale: lang });
 
-  const [limitProjects, setLimitProjects] = useState(3);
+  const [limitProjects, setLimitProjects] = React.useState(3);
 
   const loadMoreProjects = () => {
     setLimitProjects(limitProjects + 3);

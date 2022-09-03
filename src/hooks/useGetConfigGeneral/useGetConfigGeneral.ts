@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React from "react";
 import { Queries } from "@graphql-client";
 import { ConfigGeneralModel } from "@models";
 import { IConfigGeneralResponseGQL } from "@types";
@@ -23,7 +23,7 @@ const useGetConfigGeneral = ({ locale }: IUseGetConfigGeneralProps) => {
     },
   );
 
-  const configGeneral = useMemo(() => {
+  const configGeneral = React.useMemo(() => {
     if (loading || !data) return null;
     return ConfigGeneralModel(data.configGeneral.data);
   }, [data, loading]);

@@ -1,13 +1,13 @@
+import React from "react";
 import { Icon } from "@atoms";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { Sidebar } from "@organisms";
-import { FC, ReactNode, useState } from "react";
 import { ButtonLang, ButtonTheme } from "@molecules";
 import { Box, Button, Container, Flex } from "theme-ui";
 
 interface IMainLayoutProps {
-  children: ReactNode;
+  children: React.ReactElement;
   container?: boolean;
   title?: string;
 }
@@ -18,9 +18,9 @@ const variantsAnimation = {
   exit: { opacity: 0, x: 0, y: 100 },
 };
 
-const ChildrenWithAnimation: FC<Pick<IMainLayoutProps, "children">> = ({
+const ChildrenWithAnimation = ({
   children,
-}) => (
+}: Pick<IMainLayoutProps, "children">) => (
   <motion.main
     initial="hidden"
     animate="enter"
@@ -33,8 +33,8 @@ const ChildrenWithAnimation: FC<Pick<IMainLayoutProps, "children">> = ({
   </motion.main>
 );
 
-const MainLayout: FC<IMainLayoutProps> = ({ children, title, container }) => {
-  const [isShowing, setIsShowing] = useState(false);
+const MainLayout = ({ children, title, container }: IMainLayoutProps) => {
+  const [isShowing, setIsShowing] = React.useState(false);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from "react";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "theme-ui";
@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { GlobalStyles, theme } from "@core";
 import { ApolloClientContext, I18nContext, SkeletonContext } from "@contexts";
 
-const GlobalProviders = ({ children }: { children: ReactNode }) => (
+const GlobalProviders = ({ children }: { children: React.ReactElement }) => (
   <ApolloClientContext>
     <ThemeProvider theme={theme}>
       <I18nContext.Provider>

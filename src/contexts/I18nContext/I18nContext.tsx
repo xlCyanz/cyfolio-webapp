@@ -1,16 +1,8 @@
+import React from "react";
 import { Locales } from "@core";
-import {
-  FC,
-  useMemo,
-  useState,
-  ReactNode,
-  useContext,
-  useCallback,
-  createContext,
-} from "react";
 
 interface IProviderProps {
-  children: ReactNode;
+  children: React.ReactElement | React.ReactElement[];
 }
 
 type Locale = "en" | "es";
@@ -23,31 +15,27 @@ interface II18nContextProps {
   changeLang: (newLang: Locale) => void;
 }
 
-// Create a new context
-const I18nContext = createContext<II18nContextProps>({
+const I18nContext = React.createContext<II18nContextProps>({
   lang: "es",
   locale: null,
   changeLang: () => {},
 });
 
-// Create a custom hook to consume the context.
-const useI8nContext = () => useContext(I18nContext);
+const useI8nContext = () => React.useContext(I18nContext);
 
 const locales = {
   en: Locales.LocaleEN,
   es: Locales.LocaleES,
 };
 
-const Provider: FC<IProviderProps> = ({ children }) => {
-  const [lang, setLang] = useState<Locale>("en");
+const Provider = ({ children }: IProviderProps) => {
+  const [lang, setLang] = React.useState<Locale>("en");
 
-  // Use useCallback to prevent the function from being calculated on each render.
-  const changeLang = useCallback((newLang: Locale) => {
+  const changeLang = React.useCallback((newLang: Locale) => {
     setLang(newLang);
   }, []);
 
-  // Use useMemo to memorize the values and not change values unnecessarily.
-  const value = useMemo(
+  const value = React.useMemo(
     () => ({ lang, locale: locales[lang], changeLang }),
     [changeLang, lang],
   );

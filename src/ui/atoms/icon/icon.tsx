@@ -1,12 +1,12 @@
-import { ComponentProps, FC } from "react";
+import React from "react";
 
 import iconBundle from "./icon.bundle";
 
-interface IIconProps extends ComponentProps<"svg"> {
+interface IIconProps extends React.ComponentProps<"svg"> {
   name: keyof typeof iconBundle;
 }
 
-const Icon: FC<IIconProps> = ({ name, ...props }) => {
+const Icon = ({ name, ...props }: IIconProps) => {
   const IconComponent = name ? iconBundle[name] : undefined;
 
   return IconComponent ? <IconComponent {...props} /> : null;

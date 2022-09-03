@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FC } from "react";
 import { Button, ButtonProps, Link as LinkA, LinkProps } from "theme-ui";
 
 interface IButtonLinkProps {
@@ -9,12 +8,12 @@ interface IButtonLinkProps {
   linkProps?: LinkProps;
 }
 
-const ButtonLink: FC<IButtonLinkProps> = ({
+const ButtonLink = ({
   href,
   text,
   buttonProps,
   linkProps,
-}) => {
+}: IButtonLinkProps) => {
   return (
     <Link href={href} passHref scroll={false}>
       <LinkA {...linkProps}>

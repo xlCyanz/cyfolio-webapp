@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Box, Container, Flex, Heading, useThemeUI } from "theme-ui";
 
 import Navbar from "../navbar";
@@ -7,7 +6,7 @@ interface ISidebarProps {
   show?: boolean;
 }
 
-const Sidebar: FC<ISidebarProps> = ({ show }) => {
+const Sidebar = ({ show }: ISidebarProps) => {
   const { theme, colorMode } = useThemeUI();
 
   return (

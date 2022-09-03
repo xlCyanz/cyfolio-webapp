@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React from "react";
 import { Queries } from "@graphql-client";
 import { useQuery } from "@apollo/client";
 import { ProjectModel } from "@models";
@@ -20,7 +20,7 @@ const useGetProjects = ({ locale }: IUseGetProjectsProps) => {
     },
   );
 
-  const projects = useMemo(() => {
+  const projects = React.useMemo(() => {
     if (loading || !data) return null;
     return data.projects.data.map(ProjectModel);
   }, [data, loading]);

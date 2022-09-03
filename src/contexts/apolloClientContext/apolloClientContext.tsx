@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import React from "react";
 
 import { Client } from "@graphql-client";
 import {
@@ -8,15 +8,15 @@ import {
 } from "@apollo/client";
 
 interface IApolloClientContextProps {
-  children: ReactNode;
+  children: React.ReactElement;
 }
 
-const ApolloClientContext: FC<IApolloClientContextProps> = ({ children }) => {
-  const [loading, setLoading] = useState(true);
+const ApolloClientContext = ({ children }: IApolloClientContextProps) => {
+  const [loading, setLoading] = React.useState(true);
   const [apolloClient, setApolloClient] =
-    useState<ApolloClient<NormalizedCacheObject> | null>(null);
+    React.useState<ApolloClient<NormalizedCacheObject> | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     Client.initialize()
       .then(({ client }) => {
         setApolloClient(client);

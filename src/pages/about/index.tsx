@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React from "react";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
 import { Skeleton } from "@atoms";
@@ -46,12 +46,12 @@ const About: NextPage = () => {
       "tecnologies-information",
     );
 
-  const technologies = useMemo(() => {
+  const technologies = React.useMemo(() => {
     if (loadingTechnologies || !technologiesData) return null;
     return technologiesData.technologies.data.map(TechnologieModel);
   }, [loadingTechnologies, technologiesData]);
 
-  const aboutPageInfo = useMemo(() => {
+  const aboutPageInfo = React.useMemo(() => {
     if (loadingAboutPage || !aboutPageData) return null;
     return AboutPageModel(aboutPageData.aboutpage.data);
   }, [aboutPageData, loadingAboutPage]);

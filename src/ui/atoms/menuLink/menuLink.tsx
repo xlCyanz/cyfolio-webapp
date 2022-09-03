@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FC } from "react";
 import { Flex, Text, Link as LinkA } from "theme-ui";
 
 import Icon from "../icon";
@@ -11,7 +10,7 @@ interface IMenuLinkProps {
   active?: boolean;
 }
 
-const MenuLink: FC<IMenuLinkProps> = ({ name, link, iconName, active }) => {
+const MenuLink = ({ name, link, iconName, active }: IMenuLinkProps) => {
   return (
     <Link href={link} passHref scroll={false}>
       <LinkA variant={active ? "navActive" : "nav"} p={2} my={3}>

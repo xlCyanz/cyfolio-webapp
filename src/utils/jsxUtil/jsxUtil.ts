@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import React from "react";
 
-type C = ReactNode | ReactNode[];
+type C = React.ReactNode[] | React.ReactNode;
 
 const renderLoader = (loading: boolean, loaderComponent: C) => {
   return (renderComponent: C) => {

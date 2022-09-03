@@ -1,3 +1,4 @@
+import React from "react";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { jsxUtil } from "@utils";
@@ -9,7 +10,6 @@ import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { ProjectModel } from "@models";
 import { TechnologieCard } from "@molecules";
-import { useEffect, useMemo } from "react";
 import { IProjectsResponseGQL } from "@types";
 import { ButtonLink, Skeleton } from "@atoms";
 import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
@@ -33,7 +33,7 @@ const AboutProject: NextPage = () => {
     },
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (error && data === null) {
       Swal.mixin({
         customClass: {
@@ -49,10 +49,9 @@ const AboutProject: NextPage = () => {
         confirmButtonColor: `${theme.colors?.primary}`,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, error]);
+  }, [data, error, locale, theme]);
 
-  const project = useMemo(() => {
+  const project = React.useMemo(() => {
     if (loading || !data) return null;
     return ProjectModel(data.projects.data[0]);
   }, [data, loading]);
