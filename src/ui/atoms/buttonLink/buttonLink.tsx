@@ -13,12 +13,10 @@ const ButtonLink = ({
   text,
   buttonProps = {},
   linkProps = {},
-}: ButtonLinkProps) => {
-  return (
-    <Link href={href} {...linkProps}>
-      <Button {...buttonProps}>{text}</Button>
-    </Link>
-  );
-};
+}: ButtonLinkProps) => (
+  <Link href={href} {...linkProps}>
+    <Button {...buttonProps}>{text}</Button>
+  </Link>
+);
 
 export default ButtonLink;

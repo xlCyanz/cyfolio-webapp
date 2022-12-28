@@ -1,10 +1,10 @@
 import ReactLoadingSkeleton, { SkeletonProps } from "react-loading-skeleton";
 import { Box, BoxProps } from "theme-ui";
 
-interface ISkeletonProps extends SkeletonProps, BoxProps {}
+export type SkeletonWrapperProps = SkeletonProps & BoxProps;
 
-const Skeleton = (props: ISkeletonProps) => {
-  return <Box as={ReactLoadingSkeleton} {...props} />;
-};
+const SkeletonWrapper = (props: SkeletonWrapperProps) => (
+  <Box as={ReactLoadingSkeleton} {...props} />
+);
 
-export default Skeleton;
+export default SkeletonWrapper;

@@ -7,12 +7,10 @@ export type LinkProps = {
   children: React.ReactElement;
 } & LinkPropsUI;
 
-const LinkWrapper = ({ href, children, ...props }: LinkProps) => {
-  return (
-    <NextLink href={href} passHref scroll={false}>
-      <LinkUI {...props}>{children}</LinkUI>
-    </NextLink>
-  );
-};
+const LinkWrapper = ({ href, children, ...props }: LinkProps) => (
+  <NextLink href={href} passHref scroll={false}>
+    <LinkUI {...props}>{children}</LinkUI>
+  </NextLink>
+);
 
 export default LinkWrapper;

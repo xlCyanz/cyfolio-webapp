@@ -16,22 +16,20 @@ const MenuLink = ({
   link,
   iconName = "home",
   active = false,
-}: MenuLinkProps) => {
-  return (
-    <Link href={link} variant={active ? "navActive" : "nav"} p={2} my={3}>
-      <Flex sx={{ justifyContent: "left" }}>
-        {iconName && (
-          <Icon
-            name={iconName}
-            height={24}
-            width={24}
-            style={{ marginRight: "15px" }}
-          />
-        )}
-        <Text sx={{ fontSize: 2, textTransform: "capitalize" }}>{name}</Text>
-      </Flex>
-    </Link>
-  );
-};
+}: MenuLinkProps) => (
+  <Link href={link} variant={active ? "navActive" : "nav"} p={2} my={3}>
+    <Flex sx={{ justifyContent: "left" }}>
+      {iconName && (
+        <Icon
+          name={iconName}
+          height={24}
+          width={24}
+          style={{ marginRight: "15px" }}
+        />
+      )}
+      <Text sx={{ fontSize: 2, textTransform: "capitalize" }}>{name}</Text>
+    </Flex>
+  </Link>
+);
 
 export default MenuLink;
