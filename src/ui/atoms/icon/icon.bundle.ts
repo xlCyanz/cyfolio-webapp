@@ -1,14 +1,13 @@
+import { MenuIcon, TranslateIcon, XIcon } from "@heroicons/react/outline";
 import {
+  SunIcon,
   HomeIcon,
   UserIcon,
+  MoonIcon,
   ChatAlt2Icon,
   CalendarIcon,
   BriefcaseIcon,
-  SunIcon,
-  MoonIcon,
 } from "@heroicons/react/solid";
-
-import { MenuIcon, TranslateIcon, XIcon } from "@heroicons/react/outline";
 
 const iconBundle = {
   home: HomeIcon,

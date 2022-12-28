@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
+
 import { Routes } from "@core";
 import { I18nContext } from "@contexts";
 import { ProjectModel } from "@models";
 import { ButtonLink, Skeleton } from "@atoms";
-import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
 
 type ProjectCard = {
   project: ReturnType<typeof ProjectModel>;

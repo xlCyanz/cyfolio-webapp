@@ -1,6 +1,7 @@
 import React from "react";
 import { Queries } from "@graphql-client";
 import { useQuery } from "@apollo/client";
+
 import { ProjectModel } from "@models";
 import { IProjectsResponseGQL } from "@types";
 

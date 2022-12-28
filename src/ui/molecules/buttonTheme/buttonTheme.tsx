@@ -1,5 +1,6 @@
-import { Icon } from "@atoms";
 import { Button, Flex, useColorMode } from "theme-ui";
+
+import { Icon } from "@atoms";
 
 const ButtonTheme = () => {
   const [colorMode, setColorMode] = useColorMode();

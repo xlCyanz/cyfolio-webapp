@@ -1,8 +1,8 @@
 import { Flex, Text } from "theme-ui";
 
 import Icon from "../icon";
-import iconBundle from "../icon/icon.bundle";
 import Link from "../link";
+import iconBundle from "../icon/icon.bundle";
 
 export type MenuLinkProps = {
   name: string;

@@ -1,7 +1,8 @@
 import ReactMarkdown from "react-markdown";
+import { Box, Flex, Heading, Paragraph, Text, useThemeUI } from "theme-ui";
+
 import { Icon, Skeleton } from "@atoms";
 import { TimeLineModel } from "@models";
-import { Box, Flex, Heading, Paragraph, Text, useThemeUI } from "theme-ui";
 
 export type TimelineProps = {
   items: ReturnType<typeof TimeLineModel>[];

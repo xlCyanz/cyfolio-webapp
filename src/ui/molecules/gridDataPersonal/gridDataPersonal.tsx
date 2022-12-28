@@ -1,7 +1,8 @@
+import { Box, Grid, Text, useThemeUI } from "theme-ui";
+
 import { I18nContext } from "@contexts";
 import { Skeleton, Link } from "@atoms";
 import { dateUtil, Utilities } from "@utils";
-import { Box, Grid, Text, useThemeUI } from "theme-ui";
 
 require("dayjs/locale/es");
 
