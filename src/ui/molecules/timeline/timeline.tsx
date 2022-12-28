@@ -3,11 +3,11 @@ import { Icon, Skeleton } from "@atoms";
 import { TimeLineModel } from "@models";
 import { Box, Flex, Heading, Paragraph, Text, useThemeUI } from "theme-ui";
 
-interface ITimelineProps {
+export type TimelineProps = {
   items: ReturnType<typeof TimeLineModel>[];
-}
+};
 
-const Timeline = ({ items }: ITimelineProps) => {
+const Timeline = ({ items }: TimelineProps) => {
   const { theme, colorMode } = useThemeUI();
 
   if (!items || !items.length) return null;
@@ -47,11 +47,9 @@ const Timeline = ({ items }: ITimelineProps) => {
               }`}
             </Text>
           </Flex>
-
           <Heading as="h3" my={3}>
             {item?.title}
           </Heading>
-
           <Paragraph as={ReactMarkdown} sx={{ textAlign: "justify" }}>
             {item?.description}
           </Paragraph>
@@ -86,9 +84,7 @@ Timeline.Skeleton = () => (
       <Box mb={2} sx={{ width: "100%" }}>
         <Skeleton height={16} width="30%" />
       </Box>
-
       <Skeleton height={28} my={3} width="90%" />
-
       <Skeleton height={12} count={4} width="100%" />
       <Skeleton height={12} width="70%" />
     </Box>

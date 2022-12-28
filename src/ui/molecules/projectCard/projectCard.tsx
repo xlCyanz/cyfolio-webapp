@@ -5,11 +5,11 @@ import { ProjectModel } from "@models";
 import { ButtonLink, Skeleton } from "@atoms";
 import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
 
-interface IProjectCard {
+type ProjectCard = {
   project: ReturnType<typeof ProjectModel>;
-}
+};
 
-const ProjectCard = ({ project }: IProjectCard) => {
+const ProjectCard = ({ project }: ProjectCard) => {
   const { locale } = I18nContext.useI8nContext();
   const { theme, colorMode } = useThemeUI();
 
@@ -38,7 +38,6 @@ const ProjectCard = ({ project }: IProjectCard) => {
           style={{ borderRadius: "5px 5px 0 0" }}
         />
       </Box>
-
       <Box
         bg={colorMode === "light" ? "white" : "darkGray"}
         p={3}
@@ -47,11 +46,9 @@ const ProjectCard = ({ project }: IProjectCard) => {
         <Heading as="h2" mb={2}>
           {project?.title}
         </Heading>
-
         <Paragraph mb={3}>
           {`${project?.description.substring(0, 70)}...`}
         </Paragraph>
-
         <ButtonLink
           href={`${Routes.PROJECTS}/${project?.slug}`}
           text={locale?.messages.projectspage.buttonReadMore || ""}
@@ -71,13 +68,10 @@ ProjectCard.Skeleton = () => (
         sx={{ borderRadius: "5px 5px 0 0" }}
       />
     </Box>
-
     <Box py={3} sx={{ borderRadius: "0 0 5px 5px" }}>
       <Skeleton height={24} width="90%" mb={3} />
-
       <Skeleton height={12} count={2} width="90%" />
       <Skeleton height={12} width="70%" />
-
       <Skeleton height={40} width="50%" mt={2} />
     </Box>
   </Flex>

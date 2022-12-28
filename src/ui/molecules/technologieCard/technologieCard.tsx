@@ -1,6 +1,6 @@
 import { Flex, Text, useThemeUI } from "theme-ui";
 
-type TechnologieCardProps = {
+export type TechnologieCardProps = {
   title: string;
 };
 
