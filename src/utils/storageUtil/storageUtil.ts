@@ -12,21 +12,12 @@ const StorageUtil = () => {
 
   return {
     length: window?.localStorage?.length ?? 0,
-    key: (i: number) => {
-      return window?.localStorage?.key(i);
-    },
-    getItem: (key: string) => {
-      return window?.localStorage?.getItem(key);
-    },
-    setItem: (key: string, value: string) => {
-      window?.localStorage?.setItem(key, value);
-    },
-    removeItem: (key: string) => {
-      window?.localStorage?.removeItem(key);
-    },
-    clear: () => {
-      window?.localStorage?.clear();
-    },
+    key: (i: number) => window?.localStorage?.key(i),
+    getItem: (key: string) => window?.localStorage?.getItem(key),
+    setItem: (key: string, value: string) =>
+      window?.localStorage?.setItem(key, value),
+    removeItem: (key: string) => window?.localStorage?.removeItem(key),
+    clear: () => window?.localStorage?.clear(),
   };
 };
 
