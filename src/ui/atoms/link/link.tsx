@@ -4,7 +4,7 @@ import { Link as LinkUI, LinkProps as LinkPropsUI } from "theme-ui";
 
 export type LinkProps = {
   href: string;
-  children: React.ReactElement;
+  children: React.ReactNode;
 } & LinkPropsUI;
 
 const LinkWrapper = ({ href, children, ...props }: LinkProps) => (

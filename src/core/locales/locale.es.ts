@@ -7,6 +7,10 @@ export default {
       inputPlaceholder: "Seleccione un idioma disponible",
       buttonAccept: "Cambiar idioma",
       buttonCancel: "Cancelar",
+      inputOptions: {
+        en: "Ingles (English)",
+        es: "Español (Spanish)",
+      },
     },
     alertErrorFetch: {
       title: "Error al intentar obtener los datos",

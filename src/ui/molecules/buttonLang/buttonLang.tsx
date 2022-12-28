@@ -22,8 +22,7 @@ const ButtonLang = () => {
       input: "select",
       icon: "question",
       inputOptions: {
-        en: "English (Ingles)",
-        es: "Español (Spanish)",
+        ...locale?.messages.alertChangingLanguage.inputOptions,
       },
       confirmButtonText: locale?.messages.alertChangingLanguage.buttonAccept,
       cancelButtonText: locale?.messages.alertChangingLanguage.buttonCancel,
