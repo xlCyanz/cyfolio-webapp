@@ -1,31 +1,24 @@
-import Link from "next/link";
-import { Button, ButtonProps, Link as LinkA, LinkProps } from "theme-ui";
+import { Button, ButtonProps, LinkProps } from "theme-ui";
+import Link from "../link";
 
-interface IButtonLinkProps {
+export type ButtonLinkProps = {
   href: string;
   text: string;
   buttonProps?: ButtonProps;
   linkProps?: LinkProps;
-}
+};
 
 const ButtonLink = ({
   href,
   text,
-  buttonProps,
-  linkProps,
-}: IButtonLinkProps) => {
+  buttonProps = {},
+  linkProps = {},
+}: ButtonLinkProps) => {
   return (
-    <Link href={href} passHref scroll={false}>
-      <LinkA {...linkProps}>
-        <Button {...buttonProps}>{text}</Button>
-      </LinkA>
+    <Link href={href} {...linkProps}>
+      <Button {...buttonProps}>{text}</Button>
     </Link>
   );
-};
-
-ButtonLink.defaultProps = {
-  buttonProps: {},
-  linkProps: {},
 };
 
 export default ButtonLink;
