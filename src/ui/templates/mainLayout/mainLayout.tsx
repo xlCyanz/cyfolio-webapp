@@ -1,16 +1,17 @@
 import React from "react";
-import { Icon } from "@atoms";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
-import { Sidebar } from "@organisms";
-import { ButtonLang, ButtonTheme } from "@molecules";
 import { Box, Button, Container, Flex } from "theme-ui";
 
-interface IMainLayoutProps {
+import { Icon } from "@atoms";
+import { Sidebar } from "@organisms";
+import { ButtonLang, ButtonTheme } from "@molecules";
+
+export type MainLayoutProps = {
   children: React.ReactElement;
   container?: boolean;
   title?: string;
-}
+};
 
 const variantsAnimation = {
   hidden: { opacity: 0, x: -500, y: 0 },
@@ -20,7 +21,7 @@ const variantsAnimation = {
 
 const ChildrenWithAnimation = ({
   children,
-}: Pick<IMainLayoutProps, "children">) => (
+}: Pick<MainLayoutProps, "children">) => (
   <motion.main
     initial="hidden"
     animate="enter"
@@ -33,16 +34,18 @@ const ChildrenWithAnimation = ({
   </motion.main>
 );
 
-const MainLayout = ({ children, title, container }: IMainLayoutProps) => {
+const MainLayout = ({
+  children,
+  title = "",
+  container = true,
+}: MainLayoutProps) => {
   const [isShowing, setIsShowing] = React.useState(false);
 
   return (
     <>
       <NextSeo title={`CyFolio ~ ${title}`} />
-
       <Flex sx={{ flexDirection: "row", height: "100vh", width: "100vw" }}>
         <Sidebar show={isShowing} />
-
         <Box
           sx={{
             flex: "1 1 auto",
@@ -74,7 +77,6 @@ const MainLayout = ({ children, title, container }: IMainLayoutProps) => {
                 <Icon name="menu" height={24} width={24} />
               </Flex>
             </Button>
-
             <Flex
               sx={{
                 flexDirection: ["row", "column"],
@@ -90,7 +92,6 @@ const MainLayout = ({ children, title, container }: IMainLayoutProps) => {
               <ButtonLang />
             </Flex>
           </Flex>
-
           {container ? (
             <Container px={[3, 4, null, 5]} py={5}>
               <ChildrenWithAnimation>{children}</ChildrenWithAnimation>
@@ -102,11 +103,6 @@ const MainLayout = ({ children, title, container }: IMainLayoutProps) => {
       </Flex>
     </>
   );
-};
-
-MainLayout.defaultProps = {
-  title: "",
-  container: true,
 };
 
 export default MainLayout;

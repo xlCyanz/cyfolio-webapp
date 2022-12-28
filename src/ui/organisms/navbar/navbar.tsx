@@ -1,8 +1,18 @@
+import { useRouter } from "next/router";
+import { Container, Flex } from "theme-ui";
+
 import { Routes } from "@core";
 import { MenuLink } from "@atoms";
-import { useRouter } from "next/router";
 import { I18nContext } from "@contexts";
-import { Container, Flex } from "theme-ui";
+
+import iconBundle from "../../atoms/icon/icon.bundle";
+
+type Links = {
+  name: string;
+  link: string;
+  iconName: keyof typeof iconBundle;
+  active: boolean;
+};
 
 const Navbar = () => {
   const router = useRouter();
@@ -10,7 +20,7 @@ const Navbar = () => {
 
   const isActive = (route: string) => router?.pathname.includes(route);
 
-  const links = [
+  const links: Links[] = [
     {
       name: locale?.messages.navigation.home || "Home",
       link: Routes.HOME,

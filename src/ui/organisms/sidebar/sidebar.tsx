@@ -2,11 +2,11 @@ import { Box, Container, Flex, Heading, useThemeUI } from "theme-ui";
 
 import Navbar from "../navbar";
 
-interface ISidebarProps {
+export type SidebarProps = {
   show?: boolean;
-}
+};
 
-const Sidebar = ({ show }: ISidebarProps) => {
+const Sidebar = ({ show = false }: SidebarProps) => {
   const { theme, colorMode } = useThemeUI();
 
   return (
@@ -44,15 +44,10 @@ const Sidebar = ({ show }: ISidebarProps) => {
             <Heading as="h1">Folio</Heading>
           </Flex>
         </Container>
-
         <Navbar />
       </Box>
     </Flex>
   );
-};
-
-Sidebar.defaultProps = {
-  show: false,
 };
 
 export default Sidebar;
