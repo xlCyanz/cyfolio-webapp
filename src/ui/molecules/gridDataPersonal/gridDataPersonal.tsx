@@ -1,47 +1,44 @@
-import Link from "next/link";
-import { Skeleton } from "@atoms";
 import { I18nContext } from "@contexts";
-import { calculateAge, dateUtil } from "@utils";
-import { Box, Grid, Text, Link as LinkA, useThemeUI } from "theme-ui";
+import { Skeleton, Link } from "@atoms";
+import { dateUtil, Utilities } from "@utils";
+import { Box, Grid, Text, useThemeUI } from "theme-ui";
 
 require("dayjs/locale/es");
 
-interface IGridDataPersonalProps {
+export type GridDataPersonalProps = {
   birthday: string;
   email: string;
   telephone: string;
-}
+};
 
 const GridDataPersonal = ({
   birthday,
   email,
   telephone,
-}: IGridDataPersonalProps) => {
+}: GridDataPersonalProps) => {
   const { theme } = useThemeUI();
   const { locale, lang } = I18nContext.useI8nContext();
 
   const birthdayFormat = dateUtil(birthday, lang).format("DD MMM YYYY");
+  const ageCalculated = Utilities.calculateAge(birthday);
 
   return (
     <Grid columns={[1, null, "1fr 1.2fr"]} sx={{ columnGap: 3 }}>
-      {/* Birthday */}
-      <Box py={1} sx={{ borderBottom: `2px solid ${theme.colors?.muted}` }}>
-        <Text sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
-          {`${locale?.messages.aboutpage.dataPersonal.birthday}: `}
-        </Text>
-
-        <Text>{birthdayFormat}</Text>
-      </Box>
-
-      {/* Age */}
       {birthday && (
-        <Box py={1} sx={{ borderBottom: `2px solid ${theme.colors?.muted}` }}>
-          <Text sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
-            {`${locale?.messages.aboutpage.dataPersonal.age}: `}
-          </Text>
-
-          <Text>{calculateAge(birthday)}</Text>
-        </Box>
+        <>
+          <Box py={1} sx={{ borderBottom: `2px solid ${theme.colors?.muted}` }}>
+            <Text sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
+              {`${locale?.messages.aboutpage.dataPersonal.birthday}: `}
+            </Text>
+            <Text>{birthdayFormat}</Text>
+          </Box>
+          <Box py={1} sx={{ borderBottom: `2px solid ${theme.colors?.muted}` }}>
+            <Text sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
+              {`${locale?.messages.aboutpage.dataPersonal.age}: `}
+            </Text>
+            <Text>{ageCalculated}</Text>
+          </Box>
+        </>
       )}
 
       {/* Email */}
@@ -49,11 +46,11 @@ const GridDataPersonal = ({
         <Text sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
           {`${locale?.messages.aboutpage.dataPersonal.email}: `}
         </Text>
-
-        <Link href={`mailto:${email}`} passHref>
-          <LinkA sx={{ textDecoration: "none", fontWeight: "bold" }}>
-            {locale?.messages.aboutpage.dataPersonal.sendEmail}
-          </LinkA>
+        <Link
+          href={`mailto:${email}`}
+          sx={{ textDecoration: "none", fontWeight: "bold" }}
+        >
+          {locale?.messages.aboutpage.dataPersonal.sendEmail}
         </Link>
       </Box>
 
@@ -63,10 +60,12 @@ const GridDataPersonal = ({
           {`${locale?.messages.aboutpage.dataPersonal.telephone}: `}
         </Text>
 
-        <Link href={`tel:${telephone}`} passHref>
-          <LinkA color="text" sx={{ textDecoration: "none" }}>
-            {telephone}
-          </LinkA>
+        <Link
+          href={`tel:${telephone}`}
+          color="text"
+          sx={{ textDecoration: "none" }}
+        >
+          {telephone}
         </Link>
       </Box>
     </Grid>
