@@ -11,4 +11,4 @@ const calculateAge = (birthday: string) => {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 };
 
-export default calculateAge;
+export default { calculateAge };
