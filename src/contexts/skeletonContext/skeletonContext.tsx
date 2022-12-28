@@ -31,8 +31,8 @@ const SkeletonContext = ({ children }: IProviderProps) => {
 
   return (
     <SkeletonTheme
-      baseColor={`${baseColor}`}
-      highlightColor={`${highlightColor}`}
+      baseColor={baseColor as string}
+      highlightColor={highlightColor as string}
     >
       {children}
     </SkeletonTheme>
