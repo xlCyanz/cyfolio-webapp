@@ -1,12 +1,10 @@
-import { Button, ButtonProps, LinkProps } from "theme-ui";
-
-import Link from "../link";
+import { Button, ButtonProps, Link, LinkProps } from "@atoms";
 
 export type ButtonLinkProps = {
   href: string;
   text: string;
   buttonProps?: ButtonProps;
-  linkProps?: LinkProps;
+  linkProps?: Omit<LinkProps, "href" | "children">;
 };
 
 const ButtonLink = ({
