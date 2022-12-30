@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, ButtonProps as ButtonPropsUI } from "theme-ui";
 
 export type ButtonProps = ButtonPropsUI;

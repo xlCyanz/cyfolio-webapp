@@ -9,9 +9,10 @@ import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { HomePageModel } from "@models";
 import { IHomepageResponseGQL } from "@types";
-import { ButtonLink, Skeleton } from "@atoms";
+import { Skeleton } from "@atoms";
 import { useGetConfigGeneral, useQueryExpiration } from "@hooks";
 import { Box, Flex, Text, Heading, Paragraph, Container } from "theme-ui";
+import { ButtonLink } from "@molecules";
 
 const HOMEPAGE_INFO_EXPIRATION_TIME = 12 * 60 * 60; // 1 day
 
