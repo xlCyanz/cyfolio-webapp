@@ -1,18 +1,18 @@
-import { Button, ButtonProps, Link, LinkProps } from "@atoms";
+import { Button, IButtonProps, Link, ILinkProps } from "@atoms";
 
-export type ButtonLinkProps = {
+export interface IButtonLinkProps {
   href: string;
   text: string;
-  buttonProps?: ButtonProps;
-  linkProps?: Omit<LinkProps, "href" | "children">;
-};
+  buttonProps?: IButtonProps;
+  linkProps?: Omit<ILinkProps, "href" | "children">;
+}
 
 const ButtonLink = ({
   href,
   text,
   buttonProps = {},
   linkProps = {},
-}: ButtonLinkProps) => (
+}: IButtonLinkProps) => (
   <Link href={href} {...linkProps}>
     <Button {...buttonProps}>{text}</Button>
   </Link>

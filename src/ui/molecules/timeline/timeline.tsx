@@ -1,14 +1,14 @@
 import ReactMarkdown from "react-markdown";
-import { Box, Flex, Heading, Paragraph, Text, useThemeUI } from "theme-ui";
+import { Box, Heading, Paragraph, Text, useThemeUI } from "theme-ui";
 
-import { Icon, Skeleton } from "@atoms";
 import { TimeLineModel } from "@models";
+import { Icon, Skeleton, Flex } from "@atoms";
 
-export type TimelineProps = {
+export interface ITimelineProps {
   items: ReturnType<typeof TimeLineModel>[];
-};
+}
 
-const Timeline = ({ items }: TimelineProps) => {
+const Timeline = ({ items }: ITimelineProps) => {
   const { theme, colorMode } = useThemeUI();
 
   if (!items || !items.length) return null;

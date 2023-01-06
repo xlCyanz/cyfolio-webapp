@@ -1,16 +1,18 @@
 import Image from "next/image";
-import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
+import { Box, Heading, Paragraph, useThemeUI } from "theme-ui";
 
 import { Routes } from "@core";
 import { I18nContext } from "@contexts";
 import { ProjectModel } from "@models";
-import { ButtonLink, Skeleton } from "@atoms";
+import { Skeleton, Flex } from "@atoms";
 
-type ProjectCard = {
+import ButtonLink from "../button-link";
+
+export interface IProjectCardProps {
   project: ReturnType<typeof ProjectModel>;
-};
+}
 
-const ProjectCard = ({ project }: ProjectCard) => {
+const ProjectCard = ({ project }: IProjectCardProps) => {
   const { locale } = I18nContext.useI8nContext();
   const { theme, colorMode } = useThemeUI();
 

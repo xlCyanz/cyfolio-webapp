@@ -1,6 +1,6 @@
-import { Button, Flex, useColorMode } from "theme-ui";
+import { useColorMode } from "theme-ui";
 
-import { Icon } from "@atoms";
+import { Icon, Button, Flex } from "@atoms";
 
 const ButtonTheme = () => {
   const [colorMode, setColorMode] = useColorMode();
@@ -8,9 +8,9 @@ const ButtonTheme = () => {
   return (
     <Button
       p={2}
-      onClick={() =>
-        setColorMode((prev) => (prev === "light" ? "dark" : "light"))
-      }
+      onClick={() => {
+        setColorMode((prev) => (prev === "light" ? "dark" : "light"));
+      }}
       sx={{
         bg: "primary",
         color: "white",

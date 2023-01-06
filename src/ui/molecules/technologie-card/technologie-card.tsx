@@ -1,15 +1,16 @@
-import { Flex, Text, useThemeUI } from "theme-ui";
+import { Text, useThemeUI } from "theme-ui";
 
-export type TechnologieCardProps = {
+import { Flex } from "@atoms";
+
+export interface ITechnologieCardProps {
   title: string;
-};
+}
 
-const TechnologieCard = ({ title }: TechnologieCardProps) => {
+const TechnologieCard = ({ title }: ITechnologieCardProps) => {
   const { colorMode } = useThemeUI();
 
   return (
     <Flex
-      key={`tech-${title}`}
       bg={colorMode === "dark" ? "darkGray" : "muted"}
       m={1}
       py={2}
