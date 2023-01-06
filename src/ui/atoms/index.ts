@@ -8,7 +8,7 @@ export { default as Skeleton } from "./skeleton";
 export type { ISkeletonProps } from "./skeleton";
 
 export { default as Link } from "./link";
-export type { ILinksProps } from "./link";
+export type { ILinkProps } from "./link";
 
 export { default as Button } from "./button";
 export type { IButtonProps } from "./button";
