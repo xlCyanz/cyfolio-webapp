@@ -1,4 +1,3 @@
-import { dateUtil, storageUtil } from "@utils";
 import {
   useQuery,
   FetchPolicy,
@@ -6,7 +5,9 @@ import {
   OperationVariables,
 } from "@apollo/client";
 
-const LocalStorage = storageUtil();
+import { DateUtil, StorageUtil } from "@utils";
+
+const LocalStorage = StorageUtil();
 
 const getExpirationFetchPolicy = (
   expiration: number,
@@ -16,11 +17,11 @@ const getExpirationFetchPolicy = (
 
   if (
     lastFetch === null ||
-    dateUtil().diff(dateUtil(lastFetch), "second") > expiration
+    DateUtil().diff(DateUtil(lastFetch), "second") > expiration
   ) {
     LocalStorage.setItem(
       key,
-      dateUtil().set("second", expiration).toISOString(),
+      DateUtil().set("second", expiration).toISOString(),
     );
     return "network-only";
   }
