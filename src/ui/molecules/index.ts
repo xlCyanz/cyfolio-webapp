@@ -1,5 +1,5 @@
 export { default as Timeline } from "./timeline";
-export { default as ButtonLang } from "./buttonLang";
+export { default as ButtonLang } from "./button-lang";
 export { default as ButtonTheme } from "./buttonTheme";
 export { default as ProjectCard } from "./projectCard";
 export { default as GridDataPersonal } from "./gridDataPersonal";

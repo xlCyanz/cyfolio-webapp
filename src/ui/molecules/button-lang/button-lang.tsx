@@ -1,8 +1,8 @@
 import Swal from "sweetalert2";
-import { Button, Flex, useThemeUI } from "theme-ui";
+import { useThemeUI } from "theme-ui";
 
-import { Icon } from "@atoms";
 import { I18nContext } from "@contexts";
+import { Icon, Flex, Button } from "@atoms";
 
 const ButtonLang = () => {
   const { theme } = useThemeUI();
