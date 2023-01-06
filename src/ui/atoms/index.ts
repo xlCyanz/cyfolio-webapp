@@ -12,3 +12,6 @@ export type { ILinksProps } from "./link";
 
 export { default as Button } from "./button";
 export type { IButtonProps } from "./button";
+
+export { default as Flex } from "./flex";
+export type { IFlexProps } from "./flex";
