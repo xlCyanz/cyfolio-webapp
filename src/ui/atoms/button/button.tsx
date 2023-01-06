@@ -1,8 +1,8 @@
-import { Button, ButtonProps as ButtonPropsUI } from "theme-ui";
+import { Button, ButtonProps } from "theme-ui";
 
-export type ButtonProps = ButtonPropsUI;
+export type IButtonProps = ButtonProps;
 
-const ButtonWrapper = (props: ButtonProps) => {
+const ButtonWrapper = (props: IButtonProps) => {
   return <Button {...props} />;
 };
 

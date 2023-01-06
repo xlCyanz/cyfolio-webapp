@@ -56,7 +56,7 @@ export default {
       },
     },
     contactpage: {
-      title: "Contactame",
+      title: "Contácteme",
       subtitle: "Envíame un Email",
       description: "No te gustan formularios? Envíame un {email}",
       button: "Enviar Mensaje",

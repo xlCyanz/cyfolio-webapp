@@ -1,22 +1,21 @@
 import { Flex, Text } from "theme-ui";
 
-import Icon from "../icon";
+import Icon, { IIconProps } from "../icon";
 import Link from "../link";
-import iconBundle from "../icon/icon.bundle";
 
-export type MenuLinkProps = {
+export interface IMenuLinkProps {
   name: string;
   link: string;
-  iconName?: keyof typeof iconBundle;
+  iconName?: IIconProps["name"];
   active?: boolean;
-};
+}
 
 const MenuLink = ({
   name,
   link,
   iconName = "home",
   active = false,
-}: MenuLinkProps) => (
+}: IMenuLinkProps) => (
   <Link href={link} variant={active ? "navActive" : "nav"} p={2} my={3}>
     <Flex sx={{ justifyContent: "left" }}>
       {iconName && (

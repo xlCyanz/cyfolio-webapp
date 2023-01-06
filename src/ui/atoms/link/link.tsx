@@ -1,13 +1,13 @@
 import React from "react";
 import NextLink from "next/link";
-import { Link as LinkUI, LinkProps as LinkPropsUI } from "theme-ui";
+import { Link as LinkUI, LinkProps } from "theme-ui";
 
-export type LinkProps = {
+export interface ILinksProps extends LinkProps {
   href: string;
   children: React.ReactNode;
-} & LinkPropsUI;
+}
 
-const LinkWrapper = ({ href, children, ...props }: LinkProps) => (
+const LinkWrapper = ({ href, children, ...props }: ILinksProps) => (
   <NextLink href={href} passHref scroll={false}>
     <LinkUI {...props}>{children}</LinkUI>
   </NextLink>

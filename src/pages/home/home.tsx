@@ -1,18 +1,20 @@
 import React from "react";
+
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
+import { Box, Flex, Text, Heading, Paragraph, Container } from "theme-ui";
+
 import { Routes } from "@core";
 import { jsxUtil } from "@utils";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
+import { Skeleton } from "@atoms";
 import { MainLayout } from "@templates";
+import { ButtonLink } from "@molecules";
 import { I18nContext } from "@contexts";
 import { HomePageModel } from "@models";
 import { IHomepageResponseGQL } from "@types";
-import { Skeleton } from "@atoms";
 import { useGetConfigGeneral, useQueryExpiration } from "@hooks";
-import { Box, Flex, Text, Heading, Paragraph, Container } from "theme-ui";
-import { ButtonLink } from "@molecules";
 
 const HOMEPAGE_INFO_EXPIRATION_TIME = 12 * 60 * 60; // 1 day
 
