@@ -11,10 +11,10 @@ const fetchPdf = async (url: string) => {
     });
 
     const file = new Blob([response.data], { type: "application/pdf" });
-    const fileURL = URL.createObjectURL(file);
-    window.open(fileURL);
+    window.open(URL.createObjectURL(file));
   } catch (e) {
-    window.open(url, "_blank");
+    // eslint-disable-next-line no-alert
+    window.alert((e as Error).message);
   }
 };
 
