@@ -13,3 +13,6 @@ export type { ITechnologieCardProps } from "./technologie-card";
 
 export { default as SectionDataPersonal } from "./section-data-personal";
 export type { ISectionDataPersonalProps } from "./section-data-personal";
+
+export { default as Navbar } from "./navbar";
+export type { INavbarProps } from "./navbar";
