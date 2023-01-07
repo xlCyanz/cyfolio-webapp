@@ -1,6 +1,9 @@
-import { Box, Container, Flex, Heading, useThemeUI } from "theme-ui";
+import { Box, Container, Heading, useThemeUI } from "theme-ui";
 
-import Navbar from "../navbar";
+import { Flex } from "@atoms";
+import { Routes } from "@core";
+import { I18nContext } from "@contexts";
+import { INavbarProps, Navbar } from "@molecules";
 
 export type SidebarProps = {
   show?: boolean;
@@ -8,6 +11,30 @@ export type SidebarProps = {
 
 const Sidebar = ({ show = false }: SidebarProps) => {
   const { theme, colorMode } = useThemeUI();
+  const { locale } = I18nContext.useI8nContext();
+
+  const links: INavbarProps["links"] = [
+    {
+      name: `${locale?.messages.navigation.home}`,
+      link: Routes.HOME,
+      iconName: "home",
+    },
+    {
+      name: `${locale?.messages.navigation.about}`,
+      link: Routes.ABOUT,
+      iconName: "user",
+    },
+    {
+      name: `${locale?.messages.navigation.projects}`,
+      link: Routes.PROJECTS,
+      iconName: "briefcase",
+    },
+    {
+      name: `${locale?.messages.navigation.contact}`,
+      link: Routes.CONTACT,
+      iconName: "chatAlt",
+    },
+  ];
 
   return (
     <Flex
@@ -44,7 +71,7 @@ const Sidebar = ({ show = false }: SidebarProps) => {
             <Heading as="h1">Folio</Heading>
           </Flex>
         </Container>
-        <Navbar />
+        <Navbar links={links} />
       </Box>
     </Flex>
   );
