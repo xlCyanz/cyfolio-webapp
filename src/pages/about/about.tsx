@@ -1,14 +1,15 @@
 import React from "react";
-import { Queries } from "@graphql-client";
 import { NextPage } from "next";
-import { Skeleton } from "@atoms";
+import { Box, Text, Heading, Paragraph } from "theme-ui";
+
+import { Queries } from "@graphql-client";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
-import { fetchPdf, jsxUtil, replaceJsx } from "@utils";
+import { fetchPdf, JsxUtil } from "@utils";
+import { Skeleton, Flex, Button } from "@atoms";
 import { AboutPageModel, TechnologieModel } from "@models";
 import { useGetConfigGeneral, useQueryExpiration } from "@hooks";
-import { Box, Flex, Text, Heading, Paragraph, Button } from "theme-ui";
-import { GridDataPersonal, TechnologieCard, Timeline } from "@molecules";
+import { SectionDataPersonal, TechnologieCard, Timeline } from "@molecules";
 import { IAboutpageResponseGQL, ITechnologiesResponseGQL } from "@types";
 
 const TextStyled = (text: string) => (
@@ -57,7 +58,7 @@ const About: NextPage = () => {
   }, [aboutPageData, loadingAboutPage]);
 
   const handleDownloadPdf = async () => {
-    await fetchPdf(aboutPageInfo?.curriculumVitae.url || "");
+    await fetchPdf(`${aboutPageInfo?.curriculumVitae.url}`);
   };
 
   return (
@@ -65,7 +66,6 @@ const About: NextPage = () => {
       <Box>
         <Box mb={4}>
           <Heading as="h1">{locale?.messages.aboutpage.title}</Heading>
-
           <Box
             bg="primary"
             mt={2}
@@ -75,23 +75,20 @@ const About: NextPage = () => {
               width: "50px",
             }}
           />
-
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
-
-        {jsxUtil.renderLoader(
+        {JsxUtil.renderLoader(
           loadingConfigGeneral,
           <Skeleton height={30} mb={3} width="100%" />,
         )(
           <Heading as="h2" mb={3}>
-            {replaceJsx(locale?.messages.aboutpage.subtitle || "", {
+            {JsxUtil.replaceString(`${locale?.messages.aboutpage.subtitle}`, {
               name: TextStyled(configGeneral?.fullname || "fullname"),
               job: TextStyled(configGeneral?.jobTitle || "programmer"),
             })}
           </Heading>,
         )}
-
-        {jsxUtil.renderLoader(
+        {JsxUtil.renderLoader(
           loadingAboutPage,
           <>
             <Skeleton height={12} width="90%" />
@@ -99,7 +96,6 @@ const About: NextPage = () => {
             <Skeleton height={12} width="70%" />
           </>,
         )(<Paragraph>{aboutPageInfo?.description}</Paragraph>)}
-
         <Flex
           mt={4}
           sx={{
@@ -109,18 +105,17 @@ const About: NextPage = () => {
           }}
         >
           <Box sx={{ width: ["100%", "50%"] }}>
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingAboutPage,
-              <GridDataPersonal.Skeleton />,
+              <SectionDataPersonal.Skeleton />,
             )(
-              <GridDataPersonal
-                birthday={aboutPageInfo?.birthday || ""}
-                email={configGeneral?.email || ""}
-                telephone={aboutPageInfo?.telephone || ""}
+              <SectionDataPersonal
+                birthday={`${aboutPageInfo?.birthday}`}
+                email={`${configGeneral?.email}`}
+                telephone={`${aboutPageInfo?.telephone}`}
               />,
             )}
-
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingAboutPage,
               <Skeleton height={40} mt={4} width="50%" />,
             )(
@@ -135,7 +130,6 @@ const About: NextPage = () => {
               </Flex>,
             )}
           </Box>
-
           <Flex
             mt={[4, 0]}
             sx={{
@@ -144,7 +138,7 @@ const About: NextPage = () => {
               width: ["100%", "50%"],
             }}
           >
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingTechnologies,
               <>
                 <Box sx={{ width: ["100%", "50%"], m: 1 }}>
@@ -167,7 +161,6 @@ const About: NextPage = () => {
             )}
           </Flex>
         </Flex>
-
         <Flex mt={5} sx={{ flexDirection: ["column", "row"], gap: "30px" }}>
           <Box sx={{ height: "100%", width: ["100%", "50%"] }}>
             {aboutPageInfo?.educationTimeline.length !== 0 && (
@@ -175,21 +168,18 @@ const About: NextPage = () => {
                 {locale?.messages.aboutpage.timelineEducation}
               </Heading>
             )}
-
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingAboutPage,
               <Timeline.Skeleton />,
             )(<Timeline items={aboutPageInfo?.educationTimeline || []} />)}
           </Box>
-
           <Box sx={{ height: "100%", width: ["100%", "50%"] }}>
             {aboutPageInfo?.experienceTimeline.length !== 0 && (
               <Heading as="h2">
                 {locale?.messages.aboutpage.timelineExperience}
               </Heading>
             )}
-
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingAboutPage,
               <Timeline.Skeleton />,
             )(<Timeline items={aboutPageInfo?.experienceTimeline || []} />)}
