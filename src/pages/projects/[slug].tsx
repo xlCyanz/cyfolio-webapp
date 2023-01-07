@@ -1,18 +1,19 @@
 import React from "react";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { jsxUtil } from "@utils";
-import { Queries } from "@graphql-client";
-import { NextPage } from "next";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { Box, Heading, Paragraph, useThemeUI } from "theme-ui";
+
+import { JsxUtil } from "@utils";
+import { Queries } from "@graphql-client";
+import { NextPage } from "next";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { ProjectModel } from "@models";
-import { TechnologieCard } from "@molecules";
+import { Skeleton, Flex } from "@atoms";
 import { IProjectsResponseGQL } from "@types";
-import { ButtonLink, Skeleton } from "@atoms";
-import { Box, Flex, Heading, Paragraph, useThemeUI } from "theme-ui";
+import { TechnologieCard, ButtonLink } from "@molecules";
 
 const AboutProject: NextPage = () => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const AboutProject: NextPage = () => {
   );
 
   React.useEffect(() => {
-    if (error && data === null) {
+    if (error || data === null) {
       Swal.mixin({
         customClass: {
           confirmButton: "poppins",
@@ -71,8 +72,7 @@ const AboutProject: NextPage = () => {
           />
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
-
-        {jsxUtil.renderLoader(
+        {JsxUtil.renderLoader(
           loading,
           <Box
             mb={[1, 2]}
@@ -107,7 +107,6 @@ const AboutProject: NextPage = () => {
             )}
           </Box>,
         )}
-
         <Flex
           my={3}
           sx={{
@@ -118,14 +117,13 @@ const AboutProject: NextPage = () => {
             gap: [0, 3, 0],
           }}
         >
-          {jsxUtil.renderLoader(
+          {JsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["100%", "40%"] }}>
               <Skeleton height={40} />
             </Box>,
           )(<Heading as="h1">{project?.title}</Heading>)}
-
-          {jsxUtil.renderLoader(
+          {JsxUtil.renderLoader(
             loading,
             <Flex
               sx={{
@@ -161,8 +159,7 @@ const AboutProject: NextPage = () => {
             </Flex>,
           )}
         </Flex>
-
-        {jsxUtil.renderLoader(
+        {JsxUtil.renderLoader(
           loading,
           <>
             <Skeleton count={2} height={16} />
@@ -173,7 +170,6 @@ const AboutProject: NextPage = () => {
             {project?.description}
           </Paragraph>,
         )}
-
         <Flex
           mt={4}
           sx={{
@@ -182,7 +178,7 @@ const AboutProject: NextPage = () => {
             width: "100%",
           }}
         >
-          {jsxUtil.renderLoader(
+          {JsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["50%", "20%"] }}>
               <Skeleton height={40} />
@@ -191,18 +187,14 @@ const AboutProject: NextPage = () => {
             project?.urlRepository !== null && (
               <ButtonLink
                 href={project?.urlRepository || "#soon"}
-                text={
-                  locale?.messages.projectspage.dynamicPage.buttonRepository ||
-                  "Visit repository"
-                }
+                text={`${locale?.messages.projectspage.dynamicPage.buttonRepository}`}
                 buttonProps={{
                   "aria-label": "visit-repository",
                 }}
               />
             ),
           )}
-
-          {jsxUtil.renderLoader(
+          {JsxUtil.renderLoader(
             loading,
             <Box sx={{ width: ["70%", "30%"] }}>
               <Skeleton height={40} />
@@ -211,10 +203,7 @@ const AboutProject: NextPage = () => {
             project?.urlDeployed !== null && (
               <ButtonLink
                 href={project?.urlDeployed || "#soon"}
-                text={
-                  locale?.messages.projectspage.dynamicPage.buttonOnline ||
-                  "Visit online application"
-                }
+                text={`${locale?.messages.projectspage.dynamicPage.buttonOnline}`}
                 buttonProps={{
                   "aria-label": "visit-app-online",
                 }}

@@ -1,11 +1,13 @@
 import React from "react";
-import { jsxUtil } from "@utils";
 import { NextPage } from "next";
+import { Box, Button, Grid, Heading } from "theme-ui";
+
+import { Flex } from "@atoms";
+import { JsxUtil } from "@utils";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { ProjectCard } from "@molecules";
 import { useGetProjects } from "@hooks";
-import { Box, Button, Flex, Grid, Heading } from "theme-ui";
 
 const Projects: NextPage = () => {
   const { locale, lang } = I18nContext.useI8nContext();
@@ -30,14 +32,12 @@ const Projects: NextPage = () => {
           />
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
-
         <Heading as="h2" mb={4}>
           {locale?.messages.projectspage.subtitle}
         </Heading>
-
         <Box>
           <Grid columns={[1, 2, null, 3, 4]} gap={3}>
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loading,
               <>
                 <ProjectCard.Skeleton />
@@ -50,7 +50,6 @@ const Projects: NextPage = () => {
               )),
             )}
           </Grid>
-
           {projects?.length === 0 ||
             (projects === null && !loading && (
               <Flex
@@ -65,7 +64,6 @@ const Projects: NextPage = () => {
                 </Heading>
               </Flex>
             ))}
-
           {(projects?.length || 0) > limitProjects && (
             <Flex mt={5} sx={{ justifyContent: "center" }}>
               <Button onClick={loadMoreProjects} aria-label="load-more-projecs">
