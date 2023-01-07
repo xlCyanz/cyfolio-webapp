@@ -1,17 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
-import { Box, Button, Container, Flex } from "theme-ui";
+import { Box, Container } from "theme-ui";
 
-import { Icon } from "@atoms";
 import { Sidebar } from "@organisms";
+import { Icon, Flex, Button } from "@atoms";
 import { ButtonLang, ButtonTheme } from "@molecules";
 
-export type MainLayoutProps = {
+export interface IMainLayoutProps {
   children: React.ReactElement;
   container?: boolean;
   title?: string;
-};
+}
 
 const variantsAnimation = {
   hidden: { opacity: 0, x: -500, y: 0 },
@@ -21,7 +21,7 @@ const variantsAnimation = {
 
 const ChildrenWithAnimation = ({
   children,
-}: Pick<MainLayoutProps, "children">) => (
+}: Pick<IMainLayoutProps, "children">) => (
   <motion.main
     initial="hidden"
     animate="enter"
@@ -38,14 +38,14 @@ const MainLayout = ({
   children,
   title = "",
   container = true,
-}: MainLayoutProps) => {
-  const [isShowing, setIsShowing] = React.useState(false);
+}: IMainLayoutProps) => {
+  const [showSidebar, setShowSidebar] = React.useState(false);
 
   return (
     <>
       <NextSeo title={`CyFolio ~ ${title}`} />
       <Flex sx={{ flexDirection: "row", height: "100vh", width: "100vw" }}>
-        <Sidebar show={isShowing} />
+        <Sidebar show={showSidebar} />
         <Box
           sx={{
             flex: "1 1 auto",
@@ -71,7 +71,7 @@ const MainLayout = ({
                 display: ["block", "none"],
               }}
               aria-label="change-theme"
-              onClick={() => setIsShowing((prev) => !prev)}
+              onClick={() => setShowSidebar((prev) => !prev)}
             >
               <Flex>
                 <Icon name="menu" height={24} width={24} />
