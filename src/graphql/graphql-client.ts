@@ -1,5 +1,5 @@
 import fetch from "cross-fetch";
-import { storageUtil } from "@utils";
+import { StorageUtil } from "@utils";
 import { CachePersistor, LocalStorageWrapper } from "apollo3-cache-persist";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
@@ -17,7 +17,7 @@ export const initialize = async () => {
   try {
     const persistor = new CachePersistor({
       cache,
-      storage: new LocalStorageWrapper(storageUtil()),
+      storage: new LocalStorageWrapper(StorageUtil()),
       debug: process.env.NODE_ENV === "development",
       trigger: "write",
     });

@@ -2,17 +2,17 @@ import React from "react";
 
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
-import { Box, Flex, Text, Heading, Paragraph, Container } from "theme-ui";
+import { Box, Text, Heading, Paragraph, Container } from "theme-ui";
 
 import { Routes } from "@core";
-import { jsxUtil } from "@utils";
+import { JsxUtil } from "@utils";
 import { Queries } from "@graphql-client";
 import { NextPage } from "next";
-import { Skeleton } from "@atoms";
 import { MainLayout } from "@templates";
 import { ButtonLink } from "@molecules";
 import { I18nContext } from "@contexts";
 import { HomePageModel } from "@models";
+import { Skeleton, Flex } from "@atoms";
 import { IHomepageResponseGQL } from "@types";
 import { useGetConfigGeneral, useQueryExpiration } from "@hooks";
 
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                 {locale?.messages.homepage.title}
               </Heading>
 
-              {jsxUtil.renderLoader(
+              {JsxUtil.renderLoader(
                 loadingConfigGeneral,
                 <Box sx={{ width: ["95%", "70%"] }}>
                   <Skeleton height={32} />
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
               )}
             </Box>
 
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingConfigGeneral,
               <Box sx={{ width: ["90%", "80%"] }}>
                 <Skeleton height={32} mb={2} />
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
               </Heading>,
             )}
 
-            {jsxUtil.renderLoader(
+            {JsxUtil.renderLoader(
               loadingHomePage,
               <>
                 <Skeleton height={13} width="90%" />
@@ -146,7 +146,7 @@ const Home: NextPage = () => {
                   overflow: "hidden",
                 }}
               >
-                {jsxUtil.renderLoader(
+                {JsxUtil.renderLoader(
                   loadingHomePage,
                   <Skeleton height={350} />,
                 )(
