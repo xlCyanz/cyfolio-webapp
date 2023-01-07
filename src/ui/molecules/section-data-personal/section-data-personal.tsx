@@ -3,7 +3,7 @@ import { Box, Grid, Text, useThemeUI } from "theme-ui";
 
 import { I18nContext } from "@contexts";
 import { Skeleton, Link } from "@atoms";
-import { dateUtil, Utilities } from "@utils";
+import { DateUtil, Utilities } from "@utils";
 
 require("dayjs/locale/es");
 
@@ -49,7 +49,7 @@ const SectionDataPersonal = ({
       {/* Birthday */}
       <DataPersonalRow
         title={`${locale?.messages.aboutpage.dataPersonal.birthday}`}
-        value={dateUtil(birthday, lang).format("DD MMM YYYY")}
+        value={DateUtil(birthday, lang).format("DD MMM YYYY")}
       />
 
       {/* Age */}
