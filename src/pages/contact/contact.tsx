@@ -2,7 +2,7 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
 import { NextPage } from "next";
-import { replaceJsx } from "@utils";
+import { JsxUtil } from "@utils";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
 import { useGetConfigGeneral } from "@hooks";
@@ -79,13 +79,10 @@ const Contact: NextPage = () => {
   };
 
   return (
-    <MainLayout title={locale?.messages.contactpage.title || "Contact me"}>
+    <MainLayout title={locale?.messages.contactpage.title}>
       <Box>
         <Box mb={4}>
-          <Heading as="h1">
-            {locale?.messages.contactpage.title || "Contact me"}
-          </Heading>
-
+          <Heading as="h1">{`${locale?.messages.contactpage.title}`}</Heading>
           <Box
             bg="primary"
             sx={{
@@ -97,26 +94,26 @@ const Contact: NextPage = () => {
           />
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
-
         <Box>
           <Heading as="h2" mb={2}>
             {locale?.messages.contactpage.subtitle}
           </Heading>
-
           <Text>
-            {replaceJsx(locale?.messages.contactpage.description || "", {
-              email: (
-                <Link
-                  key="email-contact"
-                  href={`mailto:${configGeneral?.email}`}
-                  passHref
-                >
-                  <LinkA sx={{ textDecoration: "none" }}>email</LinkA>
-                </Link>
-              ),
-            })}
+            {JsxUtil.replaceString(
+              locale?.messages.contactpage.description || "",
+              {
+                email: (
+                  <Link
+                    key="email-contact"
+                    href={`mailto:${configGeneral?.email}`}
+                    passHref
+                  >
+                    <LinkA sx={{ textDecoration: "none" }}>email</LinkA>
+                  </Link>
+                ),
+              },
+            )}
           </Text>
-
           <Box as="form" onSubmit={handleSendEmail} sx={{ mt: 3 }}>
             <Flex sx={{ flexDirection: ["column", "row"], gap: 3 }} mb={3}>
               <Box sx={{ width: "100%" }}>
@@ -129,7 +126,6 @@ const Contact: NextPage = () => {
                   }
                 />
               </Box>
-
               <Box sx={{ width: "100%" }}>
                 <Input
                   type="email"
@@ -141,7 +137,6 @@ const Contact: NextPage = () => {
                 />
               </Box>
             </Flex>
-
             <Input
               type="text"
               variant={colorMode === "dark" ? "input.dark" : "input.light"}
@@ -152,7 +147,6 @@ const Contact: NextPage = () => {
               autoComplete="off"
               mb={3}
             />
-
             <Textarea
               name="message"
               variant={
@@ -164,7 +158,6 @@ const Contact: NextPage = () => {
               rows={6}
               mb={3}
             />
-
             <Button type="submit" aria-label="submit-contact">
               {locale?.messages.contactpage.button || "Submit"}
             </Button>

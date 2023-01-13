@@ -19,7 +19,7 @@ const replaceString = (str: string, replacement: any): any => {
 
   const getRegExp = () => {
     const regexp: Array<string> = [];
-    keys.forEach((key) => regexp.push(key as string));
+    keys.forEach((key) => regexp.push(`{${key}}`));
     return new RegExp(regexp.join("|"));
   };
 

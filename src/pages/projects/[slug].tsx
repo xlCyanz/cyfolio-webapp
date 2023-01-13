@@ -1,41 +1,30 @@
 import React from "react";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
+import { GetStaticPaths } from "next";
 import { Box, Heading, Paragraph, useThemeUI } from "theme-ui";
 
-import { JsxUtil } from "@utils";
-import { Queries } from "@graphql-client";
-import { NextPage } from "next";
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
+
+import { Flex } from "@atoms";
+import { Utilities } from "@utils";
 import { MainLayout } from "@templates";
 import { I18nContext } from "@contexts";
-import { ProjectModel } from "@models";
-import { Skeleton, Flex } from "@atoms";
-import { IProjectsResponseGQL } from "@types";
+import { IProjectResponse } from "@interfaces";
 import { TechnologieCard, ButtonLink } from "@molecules";
 
-const AboutProject: NextPage = () => {
-  const router = useRouter();
+interface ProjectDetailsPageProps {
+  project: IProjectResponse;
+}
+
+const ProjectDetailsPage = ({ project }: ProjectDetailsPageProps) => {
   const { theme } = useThemeUI();
   const { locale, lang } = I18nContext.useI8nContext();
 
-  const { slug } = router.query;
-
-  const { data, error, loading } = useQuery<IProjectsResponseGQL>(
-    Queries.GET_PROJECT,
-    {
-      variables: {
-        slug,
-        locale: lang,
-      },
-      skip: !slug,
-      fetchPolicy: "cache-and-network",
-    },
-  );
-
   React.useEffect(() => {
-    if (error || data === null) {
+    if (project === null) {
       Swal.mixin({
         customClass: {
           confirmButton: "poppins",
@@ -50,15 +39,15 @@ const AboutProject: NextPage = () => {
         confirmButtonColor: `${theme.colors?.primary}`,
       });
     }
-  }, [data, error, locale, theme]);
+  }, [locale, project, theme]);
 
-  const project = React.useMemo(() => {
-    if (loading || !data) return null;
-    return ProjectModel(data.projects.data[0]);
-  }, [data, loading]);
+  const projectDetails = React.useMemo(() => {
+    if (lang === "en") return project.englishVersion;
+    return project.spanishVersion;
+  }, [lang, project.englishVersion, project.spanishVersion]);
 
   return (
-    <MainLayout title={`${project?.title || "Loading project..."}`}>
+    <MainLayout title={`${projectDetails?.title || "Loading project..."}`}>
       <Box>
         <Box mb={4}>
           <Heading as="h1">
@@ -72,41 +61,26 @@ const AboutProject: NextPage = () => {
           />
           <Box bg="primary" sx={{ height: "5px", width: "20px" }} />
         </Box>
-        {JsxUtil.renderLoader(
-          loading,
-          <Box
-            mb={[1, 2]}
-            sx={{
-              width: "100%",
-              height: ["30vh", "40vh"],
-              borderRadius: "10px",
-              overflow: "hidden",
-            }}
-          >
-            <Skeleton width="100%" height="40vh" />,
-          </Box>,
-        )(
-          <Box
-            mb={[1, 2]}
-            sx={{
-              width: "100%",
-              height: ["30vh", "40vh"],
-              position: "relative",
-              borderRadius: "10px",
-              overflow: "hidden",
-            }}
-          >
-            {project?.banner && (
-              <Image
-                src={project?.banner.url}
-                alt="about"
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-              />
-            )}
-          </Box>,
-        )}
+        <Box
+          mb={[1, 2]}
+          sx={{
+            width: "100%",
+            height: ["30vh", "40vh"],
+            position: "relative",
+            borderRadius: "10px",
+            overflow: "hidden",
+          }}
+        >
+          {projectDetails?.banner && (
+            <Image
+              src={projectDetails?.banner}
+              alt="about"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          )}
+        </Box>
         <Flex
           my={3}
           sx={{
@@ -117,59 +91,23 @@ const AboutProject: NextPage = () => {
             gap: [0, 3, 0],
           }}
         >
-          {JsxUtil.renderLoader(
-            loading,
-            <Box sx={{ width: ["100%", "40%"] }}>
-              <Skeleton height={40} />
-            </Box>,
-          )(<Heading as="h1">{project?.title}</Heading>)}
-          {JsxUtil.renderLoader(
-            loading,
-            <Flex
-              sx={{
-                width: ["100%", "50%"],
-                gap: 2,
-              }}
-            >
-              <Box sx={{ width: "70%" }}>
-                <Skeleton height={40} />
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Skeleton height={40} />
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Skeleton height={40} />
-              </Box>
-            </Flex>,
-          )(
-            <Flex
-              mx={-1}
-              mt={[2, 0]}
-              sx={{
-                flexWrap: "wrap",
-                flexDirection: "row",
-              }}
-            >
-              {project?.technologies.map((tech) => (
-                <TechnologieCard
-                  key={`tech-${tech?.title}`}
-                  title={`${tech?.title}`}
-                />
-              ))}
-            </Flex>,
-          )}
+          <Heading as="h1">{projectDetails?.title}</Heading>
+          <Flex
+            mx={-1}
+            mt={[2, 0]}
+            sx={{
+              flexWrap: "wrap",
+              flexDirection: "row",
+            }}
+          >
+            {projectDetails?.technologies.map((tech) => (
+              <TechnologieCard key={`technologie-${tech}`} title={tech} />
+            ))}
+          </Flex>
         </Flex>
-        {JsxUtil.renderLoader(
-          loading,
-          <>
-            <Skeleton count={2} height={16} />
-            <Skeleton height={16} width="70%" />
-          </>,
-        )(
-          <Paragraph sx={{ flex: "1 1 auto" }}>
-            {project?.description}
-          </Paragraph>,
-        )}
+        <Paragraph sx={{ flex: "1 1 auto" }}>
+          {projectDetails?.description}
+        </Paragraph>
         <Flex
           mt={4}
           sx={{
@@ -178,37 +116,23 @@ const AboutProject: NextPage = () => {
             width: "100%",
           }}
         >
-          {JsxUtil.renderLoader(
-            loading,
-            <Box sx={{ width: ["50%", "20%"] }}>
-              <Skeleton height={40} />
-            </Box>,
-          )(
-            project?.urlRepository !== null && (
-              <ButtonLink
-                href={project?.urlRepository || "#soon"}
-                text={`${locale?.messages.projectspage.dynamicPage.buttonRepository}`}
-                buttonProps={{
-                  "aria-label": "visit-repository",
-                }}
-              />
-            ),
+          {projectDetails?.urlRepository !== null && (
+            <ButtonLink
+              href={projectDetails?.urlRepository || "#soon"}
+              text={`${locale?.messages.projectspage.dynamicPage.buttonRepository}`}
+              buttonProps={{
+                "aria-label": "visit-repository",
+              }}
+            />
           )}
-          {JsxUtil.renderLoader(
-            loading,
-            <Box sx={{ width: ["70%", "30%"] }}>
-              <Skeleton height={40} />
-            </Box>,
-          )(
-            project?.urlDeployed !== null && (
-              <ButtonLink
-                href={project?.urlDeployed || "#soon"}
-                text={`${locale?.messages.projectspage.dynamicPage.buttonOnline}`}
-                buttonProps={{
-                  "aria-label": "visit-app-online",
-                }}
-              />
-            ),
+          {projectDetails?.urlDeployed !== null && (
+            <ButtonLink
+              href={projectDetails?.urlDeployed || "#soon"}
+              text={`${locale?.messages.projectspage.dynamicPage.buttonOnline}`}
+              buttonProps={{
+                "aria-label": "visit-app-online",
+              }}
+            />
           )}
         </Flex>
       </Box>
@@ -216,4 +140,61 @@ const AboutProject: NextPage = () => {
   );
 };
 
-export default AboutProject;
+export const getStaticProps = async (context: { params: { slug: any } }) => {
+  const { slug } = context.params;
+
+  const projectPath = path.join(process.cwd(), "public", "projects", slug);
+  const files = fs.readdirSync(projectPath);
+
+  const projectEnglish = files.filter((value) => value.endsWith("en.md"));
+  const projectSpanish = files.filter((value) => value.endsWith("es.md"));
+  const projectImage = files.find((value) =>
+    value.match(/\.(jpg|jpeg|png|gif)$/),
+  );
+
+  const fileContentEnglish = fs.readFileSync(
+    `${projectPath}/${projectEnglish}`,
+    "utf-8",
+  );
+  const { data: dataEnglish, content: contentEnglish } =
+    matter(fileContentEnglish);
+
+  const fileContentSpanish = fs.readFileSync(
+    `${projectPath}/${projectSpanish}`,
+    "utf-8",
+  );
+
+  const { data: dataSpanish, content: contentSpanish } =
+    matter(fileContentSpanish);
+
+  const banner = projectImage ? `/projects/${slug}/${projectImage}` : null;
+
+  return {
+    props: {
+      project: {
+        spanishVersion: { ...dataSpanish, banner, description: contentSpanish },
+        englishVersion: {
+          ...dataEnglish,
+          banner,
+          description: contentEnglish,
+        },
+      },
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projectsPath = path.join(process.cwd(), "public", "projects");
+  const projectsFolder = fs.readdirSync(projectsPath);
+
+  const paths = projectsFolder.map((project) => ({
+    params: { slug: Utilities.titleToSlug(project) },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export default ProjectDetailsPage;

@@ -11,7 +11,7 @@ type LocaleEN = typeof Locales.LocaleEN;
 type LocaleES = typeof Locales.LocaleES;
 
 interface II18nContextProps {
-  lang: string;
+  lang: "en" | "es";
   locale: LocaleEN | LocaleES | null;
   changeLang: (newLang: Locale) => void;
 }

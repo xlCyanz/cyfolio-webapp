@@ -3,6 +3,7 @@ import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "theme-ui";
 import { AnimatePresence } from "framer-motion";
+
 import { GlobalStyles, theme } from "@core";
 import { ApolloClientContext, I18nContext, SkeletonContext } from "@contexts";
 

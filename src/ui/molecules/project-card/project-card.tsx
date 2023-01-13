@@ -2,14 +2,15 @@ import Image from "next/image";
 import { Box, Heading, Paragraph, useThemeUI } from "theme-ui";
 
 import { Routes } from "@core";
+import { IProject } from "@interfaces";
+import { Utilities } from "@utils";
 import { I18nContext } from "@contexts";
-import { ProjectModel } from "@models";
 import { Skeleton, Flex } from "@atoms";
 
 import ButtonLink from "../button-link";
 
 export interface IProjectCardProps {
-  project: ReturnType<typeof ProjectModel>;
+  project: IProject;
 }
 
 const ProjectCard = ({ project }: IProjectCardProps) => {
@@ -35,7 +36,7 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
         }}
       >
         <Image
-          src={project?.banner.url || ""}
+          src={project.banner}
           layout="fill"
           objectFit="cover"
           style={{ borderRadius: "5px 5px 0 0" }}
@@ -53,7 +54,7 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
           {`${project?.description.substring(0, 70)}...`}
         </Paragraph>
         <ButtonLink
-          href={`${Routes.PROJECTS}/${project?.slug}`}
+          href={`${Routes.PROJECTS}/${Utilities.titleToSlug(project.title)}`}
           text={locale?.messages.projectspage.buttonReadMore || ""}
           buttonProps={{ px: 3, "aria-label": "read-more-project" }}
         />
